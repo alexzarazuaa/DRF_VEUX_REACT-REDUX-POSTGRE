@@ -1,0 +1,14 @@
+----------------------------------------------------------------- INSTALACION VUE ------------------------------------------------------------------
+
+PASOS : 
+
+   Instalar  Vue CLI 
+
+         sudo npm install -g @vue/cli
+
+    Ver la version de vue
+
+        vue --version
+    
+    
+
