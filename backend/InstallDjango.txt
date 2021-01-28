@@ -1,0 +1,5 @@
+sudo docker-compose run web django-admin startproject config .
+sudo chmod -R 777 .
+sudo docker-compose up
+
+https://docs.docker.com/compose/django/
