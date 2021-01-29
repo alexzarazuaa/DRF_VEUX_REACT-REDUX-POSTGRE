@@ -12,3 +12,25 @@ PASOS :
     
     
 
+
+
+ Para crear unn nuevo proyecto vue
+
+
+        vue create hello-world  
+
+        *  Seleciona la Version vue3 *
+    
+    Luego ya : 
+
+        npm install
+        npm run build
+        npm run serve
+
+
+-------------------------------------------------   INSTALAR AXIOS --------------------------------------------------------------
+
+PASOS : 
+
+    npm install axios   
+
