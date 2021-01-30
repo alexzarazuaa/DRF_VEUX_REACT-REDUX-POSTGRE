@@ -1,0 +1,30 @@
+
+version: '3.3'
+
+services:
+  db:
+    image: postgres:latest
+    container_name: postgres01 
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+  web:
+    build: ./backend
+    command: python3 manage.py runserver 0.0.0.0:8001
+    depends_on:
+      - db
+    volumes:
+      - ./backend/:/backend
+    ports:
+      - "8001:8001"
+  vue:
+     build: ./frontend/vue_app/
+     container_name: vue_app
+     ports:
+      - 8080:8080
+     command: npm run serve
+     volumes:
+       - "./frontend/vue_app:/frontend/vue_app"
+
+      
