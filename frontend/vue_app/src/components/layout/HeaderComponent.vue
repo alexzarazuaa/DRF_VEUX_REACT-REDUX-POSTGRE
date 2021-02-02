@@ -1,8 +1,34 @@
 <template>
-  <section class="header">
-    <h1 class = "header__icons">Reproduce</h1>
-  </section>
+ <nav class="header">
+  <div class="container">
+    <a class="logo" routerLink="/">KALYPSO</a>
+    <nav class="header-right">
+      <!-- Show this for logged out users -->
+        <div>
+          <a class="nav-link">
+            <router-link to="/home">Home</router-link>
+          </a>
+          <a class="nav-link">  
+            <router-link to="/bares">Bares</router-link>
+          </a>
+          <a class="nav-link"  routerLinkActive="active">
+               <router-link to="/login">Sign in</router-link>
+          </a>
+         <a class="nav-link"  routerLinkActive="active">
+               <router-link to="/register">Sign up</router-link>
+          </a>
+  
+
+      </div>
+
+    </nav>
+
+
+  </div>
+</nav>
 </template>
+
+
 
 <script>
 export default {
@@ -11,13 +37,62 @@ export default {
 };
 </script>
 
+
+
 <style>
+* {box-sizing: border-box;}
+
+body { 
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
 .header {
-  padding: 5px;
-  background: rgba(45, 45, 45, 0.88);
-  grid-area: "header";
+  overflow: hidden;
+  background-color: #f1f1f1;
+  padding: 10px 10px;
 }
-.header__icons {
-  color: rgba(235, 235, 245, 0.6);
+
+.header a {
+  float: left;
+  color: black;
+  text-align: center;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px; 
+  line-height: 25px;
+  border-radius: 4px;
 }
+
+.header a.logo {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.header a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.header a.active {
+  background-color: dodgerblue;
+  color: white;
+}
+
+.header-right {
+  float: right;
+}
+
+@media screen and (max-width: 500px) {
+  .header a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+  
+  .header-right {
+    float: none;
+  }
+}
+
 </style>

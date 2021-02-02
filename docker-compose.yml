@@ -9,8 +9,11 @@ services:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
+    ports:
+      - 5432:5432
   web:
     build: ./backend
+    container_name: backend_web_1
     command: python3 manage.py runserver 0.0.0.0:8001
     depends_on:
       - db
@@ -19,12 +22,12 @@ services:
     ports:
       - "8001:8001"
   vue:
-     build: ./frontend/vue_app/
-     container_name: vue_app
-     ports:
-      - 8080:8080
-     command: npm run serve
-     volumes:
-       - "./frontend/vue_app:/frontend/vue_app"
+    build: ./frontend/vue_app
+    container_name: vue_app
+    ports:
+      - "8080:8080"
+    command: npm start
+    volumes:
+      - "./frontend/vue:/frontend/vue"
 
       
