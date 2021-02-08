@@ -10,14 +10,16 @@ https://docs.docker.com/compose/django/
 -------------------------Create app---------------------
 
 sudo docker-compose up
-sudo docker exec -it backend_web_1 sh
-python3 manage.py startapp bar
+sudo docker exec -it drfveuxreactreduxpostgre_web_1 sh
+python3 manage.py startapp profiles
+sudo chmod -R 777 .
+(a todo el backend)
 
 ////////////////////////////////////////////////////////////////////////////////
 $ sudo docker exec -it usersRestAPI01 sh
-    # python3 manage.py makemigrations
-    # python3 manage.py migrate
-    # python3 manage.py createsuperuser -> yomogan/yomogan@gmail.com/drf-react-redux
+python3 manage.py makemigrations
+python3 manage.py migrate
+python3 manage.py createsuperuser -> yomogan/yomogan@gmail.com/drf-react-redux
     - Type `exit` to leave the sh session
 ///////////////////////////////////////////////////////////
 
