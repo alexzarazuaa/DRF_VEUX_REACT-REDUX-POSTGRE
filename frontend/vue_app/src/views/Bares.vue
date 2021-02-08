@@ -5,15 +5,15 @@
       <p>A place to shop your <i>QUALITY</i> CLOTH.</p>
     </div>
   </div>
+
+  <section>
+  <h1>BARES</h1>
+  </section>
 </template>
-
-
-
 <script lang="ts">
-  import { Vue } from 'vue-class-component';
-  export default class Home extends Vue {}
+  import {  Vue } from 'vue-class-component';
+  export default class Bares extends Vue {}
 </script>
-
 
 <style>
 
