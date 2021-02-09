@@ -16,7 +16,7 @@ sudo chmod -R 777 .
 (a todo el backend)
 
 ////////////////////////////////////////////////////////////////////////////////
-$ sudo docker exec -it usersRestAPI01 sh
+$ sudo docker exec -it backend_web_1 sh
 python3 manage.py makemigrations
 python3 manage.py migrate
 python3 manage.py createsuperuser -> yomogan/yomogan@gmail.com/drf-react-redux

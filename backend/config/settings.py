@@ -25,7 +25,7 @@ SECRET_KEY = '^uzgtw_q7nk&ww28$xm_*bfqflc$d)l!ls&3-90jj%x92gd@x!'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['0.0.0.0']
 
 
 # Application definition
@@ -128,7 +128,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 CORS_ORIGIN_WHITELIST = (
-    'http://localhost:8080',
+   'http://localhost:8080',
+    'http://0.0.0.0:8080'
 )
 
 AUTH_USER_MODEL = 'authentication.User'

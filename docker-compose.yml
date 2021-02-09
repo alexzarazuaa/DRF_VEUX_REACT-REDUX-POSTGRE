@@ -31,9 +31,22 @@ services:
     container_name: vue_app
     ports:
      - 8080:8080
-    command: npm run serve
+    command: npm start
     volumes:
      - "./frontend/vue_app:/frontend/vue_app"
+    depends_on:
+      - postgres01
+    networks:
+      - network
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "dakiti@gmail.com"
+      PGADMIN_DEFAULT_PASSWORD: "alex123456789"
+    ports:
+      - 6969:80
     depends_on:
       - postgres01
     networks:
