@@ -12,8 +12,6 @@ PASOS :
     
     
 
-
-
  Para crear unn nuevo proyecto vue
 
 
@@ -33,4 +31,10 @@ PASOS :
 PASOS : 
 
     npm install axios   
+
+
+npm install -g babel-eslint
+
+
+
 

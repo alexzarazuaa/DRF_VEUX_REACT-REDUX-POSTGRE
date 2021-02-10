@@ -10,10 +10,16 @@
   <h1>BARES</h1>
   </section>
 </template>
-<script lang="ts">
-  import {  Vue } from 'vue-class-component';
-  export default class Bares extends Vue {}
+
+
+<script>
+    export default {
+      name: "Bares",
+      components: {},
+    };
 </script>
+
+
 
 <style>
 

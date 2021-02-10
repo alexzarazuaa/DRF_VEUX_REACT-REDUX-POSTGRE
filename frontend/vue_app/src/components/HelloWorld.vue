@@ -34,7 +34,7 @@
   </div>
 </template>
 
-<script lang="ts">
+<script lang>
 import { Options, Vue } from 'vue-class-component';
 
 @Options({
