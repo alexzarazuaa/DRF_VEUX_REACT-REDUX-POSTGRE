@@ -22,12 +22,11 @@ class BarSerializer(serializers.ModelSerializer):
     class Meta:
         model = Bar
         fields = (
-            'owner',
-            'body',
-            'createdAt',
-            'description',
             'slug',
-            'title',
+            'name',
+            'description',
+            'owner',
+            'createdAt',
             'updatedAt',
         )
 
