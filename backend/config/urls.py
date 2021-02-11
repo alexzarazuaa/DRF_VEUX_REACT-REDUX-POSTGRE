@@ -10,3 +10,4 @@ urlpatterns = [
     url('api/', include('authentication.urls')),
     url('api/', include('profiles.urls')),
 ]
+
