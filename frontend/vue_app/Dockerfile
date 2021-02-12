@@ -1,7 +1,3 @@
-FROM node:10-alpine
-
-WORKDIR /app
-COPY package*.json ./
-RUN npm install
-COPY . ./
-RUN npm run build
+FROM node:12.14.0
+RUN npm install -g @vue/cli
+EXPOSE 8080

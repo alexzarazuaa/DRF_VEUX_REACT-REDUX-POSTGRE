@@ -27,18 +27,18 @@ services:
     - network
 
   vue:
-    build: ./frontend/vue_app/
-    container_name: vue_app
+    container_name: "VueJS_container"
+    build: ./frontend/vue-vuex/.
+    working_dir: /app
+    command: bash -c "npm install && npm run serve"
     ports:
-     - 8080:8080
-    command: npm start
+      - "4000:8080"
     volumes:
-     - "./frontend/vue_app:/frontend/vue_app"
+      - ./frontend/vue-vuex:/app
     depends_on:
-      - postgres01
+      - servidor
     networks:
       - network
-
   pgadmin:
     image: dpage/pgadmin4
     container_name: pgadmin
