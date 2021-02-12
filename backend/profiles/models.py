@@ -5,7 +5,6 @@ class Profile(TimestampedModel):
     user = models.OneToOneField(
         'authentication.User', on_delete=models.CASCADE
     )
-
     bio = models.TextField(blank=True)
     image = models.URLField(blank=True)
     
