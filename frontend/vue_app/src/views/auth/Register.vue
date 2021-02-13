@@ -24,7 +24,7 @@
 
 
 
-<script lang="ts">
+<script>
   import { Vue } from 'vue-class-component';
   export default class Register extends Vue {}
 </script>

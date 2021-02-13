@@ -1,18 +1,26 @@
 <template>
   <div class="banner">
     <div class="container">
-      <h1 class="logo-font">KALYPSO</h1>
-      <p>A place to shop your <i>QUALITY</i> CLOTH.</p>
+      <h1 class="logo-font"> SEEK BAR</h1>
+      <p> MAKE YOUR RESERVATION IN THE BEST BARS</p>
     </div>
   </div>
+
 </template>
 
 
 
-<script lang="ts">
-  import { Vue } from 'vue-class-component';
-  export default class Home extends Vue {}
+<script>
+  export default {
+    name: "Home",
+    components: {
+
+    },
+  }
+  
 </script>
+
+
 
 
 <style>

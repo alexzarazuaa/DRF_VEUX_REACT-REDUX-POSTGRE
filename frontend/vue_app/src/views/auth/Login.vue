@@ -50,13 +50,14 @@
 
 
 
-<script lang="ts">
-  import { Vue } from 'vue-class-component';
-  import { mapState } from "vuex";
-  import { LOGIN } from "@/store/actions.type";
+<script>
 
-  export default class Login extends Vue {
-  }
+export default {
+  name: "Login",
+  components: {
+  },
+
+};
 </script>
 
 

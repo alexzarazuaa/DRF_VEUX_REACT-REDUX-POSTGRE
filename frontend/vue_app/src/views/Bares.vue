@@ -1,19 +1,32 @@
 <template>
   <div class="banner">
     <div class="container">
-      <h1 class="logo-font">KALYPSO</h1>
-      <p>A place to shop your <i>QUALITY</i> CLOTH.</p>
+      <h1 class="logo-font">SEEK BAR</h1>
+      <p> MAKE YOUR RESERVATION IN THE BEST BARS</p>
     </div>
   </div>
 
-  <section>
-  <h1>BARES</h1>
+  <section class="bares">
+    <h1>BARES</h1>
+    <BarsList />
   </section>
 </template>
-<script lang="ts">
-  import {  Vue } from 'vue-class-component';
-  export default class Bares extends Vue {}
+
+
+<script>
+  import BarsList from '@/components/BarsListComponent/BarsList'
+  export default {
+    name: "Bares",
+    components: {
+      BarsList,
+    },
+  }
+  
 </script>
+
+
+
+
 
 <style>
 
@@ -47,6 +60,13 @@
   font-size: 25px;
   font-weight: bold;
 }
-
+.bares {
+  padding: 10px;
+}
+.bares h1 {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  color: green;
+}
 
 </style>
