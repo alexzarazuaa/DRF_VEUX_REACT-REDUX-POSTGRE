@@ -2,12 +2,11 @@
   <div class="banner">
     <div class="container">
       <h1 class="logo-font">SEEK BAR</h1>
-      <p> MAKE YOUR RESERVATION IN THE BEST BARS</p>
+      <p> BARES ONTINYENT</p>
     </div>
   </div>
 
   <section class="bares">
-    <h1>BARES</h1>
     <BarsList />
   </section>
 </template>
@@ -48,7 +47,7 @@
   justify-content: center;
   align-items: center;
 }
-.logo {
+.logo,.font{
 
   color: black;
   text-align: center;
@@ -62,11 +61,9 @@
 }
 .bares {
   padding: 10px;
+   margin-top: 100px;
+  margin-bottom: 100px;
 }
-.bares h1 {
-  margin-top: 50px;
-  margin-bottom: 50px;
-  color: green;
-}
+
 
 </style>

@@ -21,6 +21,7 @@ const getters = {
   bars: (initialState: any) => {
     return initialState.Bars;
   },
+
   isLoading: (initialState: any) => {
     return initialState.IsLoading;
   }

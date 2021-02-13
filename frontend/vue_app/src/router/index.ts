@@ -3,6 +3,7 @@ import Home from '../views/Home.vue';
 import Contact from '../views/Contact.vue';
 import Bares from '../views/Bares.vue';
 import Login from '../views/auth/Login.vue';
+import Bar from '../views/Bar.vue';
 
 import Register from '../views/auth/Register.vue';
 
@@ -27,6 +28,12 @@ const routes: Array<RouteRecordRaw> = [
     path: '/bares',
     name: 'Bares',
     component: Bares
+  },
+  {
+    path: '/bar/:slug',
+    name: 'Bar',
+    props: true,
+    component: Bar
   },
   {
     path: '/register',

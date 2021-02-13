@@ -8,17 +8,17 @@ import JwtService from './jwt.service';
 
 const ApiService = {
 
-  // setHeader() {
-  //   axios.defaults.headers.common[
-  //     "Authorization"
-  //   ] = `Token ${JwtService.getToken()}`;
-  // },
+  setHeader() {
+    axios.defaults.headers.common[
+      "Authorization"
+    ] = `Token ${JwtService.getToken()}`;
+  },
 
-  // query(resource: string, params: any) {
-  //   return axios.get(resource, params).catch((error: any) => {
-  //     throw new Error(`[RWV] ApiService ${(error)}`);
-  //   });
-  // },
+  query(resource: string, params: any) {
+    return axios.get(resource, params).catch((error: any) => {
+      throw new Error(`[RWV] ApiService ${(error)}`);
+    });
+  },
 
   // get(resource: string,) {
   //   //return axios.get('http://0.0.0.0:8001/api/bars/').catch((error: any) => {
@@ -70,29 +70,18 @@ export default ApiService;
 
 export const BarsService = {
 
-  // deleteBar(bar: Bar) {
-  //   return axios.delete(`${API_URL}/bar/${bar.slug}`);
-  // },
-  // getBars() {
-  //   console.log('JJA F AXIOS');
-  //   //return axios.get(`${API_URL}`);
-  //   return axios.get('http://0.0.0.0:8001/api/bars');
-  // }
+  deleteBar(bar: Bar) {
+    return axios.delete(`${API_URL}/bar/${bar.slug}`);
+  },
 
-
-
-//   getBars() {
-//     return ApiService.get('/bars');
-// }
-
-  getBars() {
+  getBars() { //GET ALLS
     return ApiService.get(`${API_URL}/bars`);
-  }
-  //GET ONE BAR 
+  },
 
-  // getBars(slug) {
-  //   return axios.get<Bar[]>(`${API_URL}/bar/${bar.slug}`);
-  // }
+
+  getBar(slug: string) {  //GET ONE BAR 
+    return ApiService.get(`${API_URL}/bars/${slug}`);
+  }
   // addBar(bar: Bar) {
   //   return axios.post(`${API_URL}/bars/`, { bar });
   // },

@@ -1,7 +1,6 @@
 <template>
   <div @click="details(bar.slug)" class="bar-preview">
     <p class="bar-title">{{ bar.name }}</p>
-    <label class="bar-price">{{ bar.description }}</label>
   </div>
 </template>
 
@@ -12,7 +11,12 @@ export default {
     component: {},
     props:[
          'bar'
-    ]
+    ],
+     methods: {
+      details(slug) {
+        this.$router.push({ name: "Bar", params: {slug: slug}});
+      }
+    }
    
   
   
@@ -34,10 +38,12 @@ export default {
 }
 .bar-preview:hover {
   transition: 0.4s;
-    background-color: #eeefff;
+    background-color: grey;
 }
 .bar-title {
   color: #ef5555;
+  font-size: 32px;
+  font-weight:bold;
 }
 .bar-title {
   transition: 0.4s;
@@ -45,9 +51,6 @@ export default {
   text-transform: capitalize;
   font-size: 1.2em;
   margin-bottom: 5px;
-}
-.bar-price {
-  font-weight: bold;
 }
 
 </style>
