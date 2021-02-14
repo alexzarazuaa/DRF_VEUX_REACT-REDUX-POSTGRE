@@ -13,7 +13,7 @@
         <router-link to="/contact">Contact</router-link>
         <router-link  v-if="!isAuthenticated" to="/login">Login</router-link>
         <router-link  v-if="!isAuthenticated" to="/register">Register</router-link>
-        <a v-if="currentUser.username">{{currentUser.username}}</a>
+        <router-link  :to="{ name: 'Profile', params: { username: currentUser.username }}"><a v-if="currentUser.username">{{currentUser.username}}</a></router-link>
         <a class="Btn-logout"  v-if="isAuthenticated" @click="logout">LogOut</a>
       
       </div>
