@@ -46,6 +46,7 @@ const actions = {
     return new Promise((resolve, reject) => {
       ApiService.post("users", { user: credentials })
         .then(({ data }) => {
+          console.log(data)
           context.commit(MutationsType.SET_AUTH, data.user);
           resolve(data);
         })
@@ -59,7 +60,7 @@ const actions = {
   // Check auth
   [ActionsType.CHECK_AUTH](context: any) {
     if (JwtService.getToken()) {
-      // ApiService.setHeader();
+      ApiService.setHeader();
       ApiService.get("user")
         .then(({ data }: any) => {
           context.commit(MutationsType.SET_AUTH, data.user);

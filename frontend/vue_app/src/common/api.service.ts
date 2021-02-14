@@ -48,7 +48,8 @@ const ApiService = {
 
 
   post(resource: string, params: any) {
-    return axios.post(`${resource}`, params);
+    console.log(resource)
+    return axios.post(`${API_URL}/${resource}`, params);
   },
 
   update(resource: string, slug: string, params: any) {
