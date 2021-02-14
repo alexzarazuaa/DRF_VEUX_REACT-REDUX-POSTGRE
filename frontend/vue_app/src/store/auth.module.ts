@@ -24,9 +24,11 @@ const getters = {
 const actions = {
   // Login
   [ActionsType.LOGIN](context: any, credentials: any) {
+    console.log('ENTRA ACTIOIN LOGIN');
     return new Promise(resolve => {
       ApiService.post("users/login", { user: credentials })
         .then(({ data }) => {
+          console.log(data)
           context.commit(MutationsType.SET_AUTH, data.user);
           resolve(data);
         })
@@ -38,6 +40,7 @@ const actions = {
 
   // Logout
   [ActionsType.LOGOUT](context: any) {
+    console.log('ENTRA ACTIOIN LOGOUT');
     context.commit(MutationsType.PURGE_AUTH);
   },
 
@@ -46,7 +49,7 @@ const actions = {
     return new Promise((resolve, reject) => {
       ApiService.post("users", { user: credentials })
         .then(({ data }) => {
-          console.log(data)
+         // console.log(data)
           context.commit(MutationsType.SET_AUTH, data.user);
           resolve(data);
         })
@@ -63,6 +66,7 @@ const actions = {
       ApiService.setHeader();
       ApiService.get("user")
         .then(({ data }: any) => {
+          //console.log(data)
           context.commit(MutationsType.SET_AUTH, data.user);
         })
         .catch(({ response }) => {

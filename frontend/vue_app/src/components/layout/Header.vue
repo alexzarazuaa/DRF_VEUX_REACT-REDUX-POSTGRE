@@ -11,8 +11,11 @@
         <router-link to="/home">Home</router-link>
         <router-link to="/bares">Bares</router-link>
         <router-link to="/contact">Contact</router-link>
-        <router-link to="/login">Login</router-link>
-        <router-link to="/register">Register</router-link>
+        <router-link  v-if="!isAuthenticated" to="/login">Login</router-link>
+        <router-link  v-if="!isAuthenticated" to="/register">Register</router-link>
+        <a v-if="currentUser.username">{{currentUser.username}}</a>
+        <a class="Btn-logout"  v-if="isAuthenticated" @click="logout">LogOut</a>
+      
       </div>
     </nav>
 
@@ -21,9 +24,28 @@
 
 
 
-<script lang="ts">
-  import { Vue } from 'vue-class-component';
-  export default class Header extends Vue {}
+<script>
+import { ActionsType } from "@/store/actions.type";
+import { mapGetters } from "vuex";
+export default {
+    name: "Header",
+    computed: {
+      ...mapGetters(["currentUser", "isAuthenticated"])
+    },
+    methods: {
+      logout() {
+        this.$store.dispatch(ActionsType.LOGOUT);
+      }
+    },
+     watch: {
+        currentUser: {
+          deep: true,
+          handler (value) {
+            console.log('watch currentUser' , value)
+          }
+    }
+  }
+}
 
 </script>
 
@@ -85,6 +107,14 @@
 .navbar a.active {
   background-color: dodgerblue;
   color: white;
+}
+
+.Btn-logout{
+    cursor: pointer;
+}
+.Btn-logout a:hover {
+    background-color: red;
+    color: red;
 }
 
 </style>
