@@ -4,7 +4,7 @@
 
 <p align="center">
 
-  <h2 align="center"><strong>KALYPSO APP</strong></h2>
+  <h2 align="center"><strong>SEEK BAR</strong></h2>
 
 </p>
 
