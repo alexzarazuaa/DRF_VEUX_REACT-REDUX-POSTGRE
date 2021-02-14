@@ -1,11 +1,7 @@
 # ALEX ZARAZUA | VICENT COLL 
 
 
-<p align="center">
-
  **DRF_VUEX_REACT-REDUX-POSTGRE**
-
-</p>
 
 <p align="center">
 
@@ -80,6 +76,8 @@ In addition to that, you can place orders to be taken wherever you want.
  * Docker
  * Docker-Compose
  * PostGre
+ * PgAdmin
+ * PostMan
 
 ## Other Technologies
 
