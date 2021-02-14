@@ -1,6 +1,11 @@
 # ALEX ZARAZUA | VICENT COLL 
 
-**DRF_VUEX_REACT-REDUX-POSTGRE**
+
+<p align="center">
+
+ **DRF_VUEX_REACT-REDUX-POSTGRE**
+
+</p>
 
 <p align="center">
 
