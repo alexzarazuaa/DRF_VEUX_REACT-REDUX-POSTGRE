@@ -9,7 +9,10 @@ class BarSerializer(serializers.ModelSerializer):
     description = serializers.CharField(required=False)
     slug = serializers.SlugField(required=False)
 
-
+    favorited = serializers.SerializerMethodField()
+    favoritesCount = serializers.SerializerMethodField(
+        method_name='get_favorites_count'
+    )
 
     # Django REST Framework makes it possible to create a read-only field that
     # gets it's value by calling a function. In this case, the client expects
@@ -45,7 +48,7 @@ class BarSerializer(serializers.ModelSerializer):
     def get_updated_at(self, instance):
         return instance.updated_at.isoformat()
 
-   def get_favorited(self, instance):
+    def get_favorited(self, instance):
         request = self.context.get('request', None)
 
         if request is None:
@@ -58,3 +61,5 @@ class BarSerializer(serializers.ModelSerializer):
         return request.user.profile.has_favorited(instance)
 
     def get_favorites_count(self, instance):
+        return instance.favorited_by.count()
+
