@@ -2,7 +2,7 @@
  <section>
 
 <div class="container">
-  <form action="/action_page.php">
+  <form  @submit.prevent="onSubmit(email, password)">
     <div class="row">
       <h2 style="text-align:center">Login with Social Media or Manually</h2>
       <div class="vl">
@@ -26,9 +26,9 @@
           <p>Or sign in manually:</p>
         </div>
 
-        <input type="text" name="username" placeholder="Username" required>
-        <input type="password" name="password" placeholder="Password" required>
-        <input type="submit" value="Login">
+        <input class="form-control form-control-lg" type="email" v-model="email" placeholder="Email" required />
+        <input class="form-control form-control-lg"  type="password" v-model="password" placeholder="password" required />
+        <button  class="signupbtn">Sign In</button>
       </div>
       
     </div>
@@ -38,7 +38,7 @@
 <div class="bottom-container">
   <div class="row">
     <div class="col">
-      <a href="#" style="color:white" class="btn">Sign up</a>
+      <router-link :to="{ name: 'Register' }" > <a style="color:white" class="btn">Register</a> </router-link>
     </div>
     <div class="col">
       <a href="#" style="color:white" class="btn">Forgot password?</a>
@@ -50,13 +50,30 @@
 
 
 
-<script lang="ts">
-  import { Vue } from 'vue-class-component';
-  import { mapState } from "vuex";
-  import { LOGIN } from "@/store/actions.type";
-
-  export default class Login extends Vue {
-  }
+<script>
+import { mapState } from "vuex";
+import { ActionsType } from "@/store/actions.type";
+export default {
+    name: "Login",
+    data() {
+      return {
+        email: null,
+        password: null
+      };
+    },
+    methods: {
+      onSubmit(email, password) {
+        this.$store
+          .dispatch(ActionsType.LOGIN, { email, password })
+          .then(() => this.$router.push({ name: "Home" }));
+      }
+    },
+    computed: {
+      ...mapState({
+        errors: state => state.auth.errors
+      })
+    }
+};
 </script>
 
 
