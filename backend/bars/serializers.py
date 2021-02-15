@@ -26,6 +26,8 @@ class BarSerializer(serializers.ModelSerializer):
             'name',
             'description',
             'owner',
+            'favorited',
+            'favoritesCount',
             'createdAt',
             'updatedAt',
         )
@@ -42,3 +44,17 @@ class BarSerializer(serializers.ModelSerializer):
 
     def get_updated_at(self, instance):
         return instance.updated_at.isoformat()
+
+   def get_favorited(self, instance):
+        request = self.context.get('request', None)
+
+        if request is None:
+            return False
+
+        # if not request.user.is_authenticated():
+        if not request.user.is_authenticated:
+            return False
+
+        return request.user.profile.has_favorited(instance)
+
+    def get_favorites_count(self, instance):

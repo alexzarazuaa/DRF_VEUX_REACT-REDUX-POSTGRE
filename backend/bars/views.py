@@ -49,9 +49,6 @@ class BarViewSet(viewsets.ModelViewSet):
 
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-
-
-
 # requests.del(`/bar/${slug}`),
 class BarsDestroyAPIView(generics.DestroyAPIView):
     lookup_url_kwarg = 'slug'
@@ -66,3 +63,37 @@ class BarsDestroyAPIView(generics.DestroyAPIView):
         bar.delete()
         return Response(None, status=status.HTTP_204_NO_CONTENT)
 
+class BarsFavoriteAPIView(APIView):
+    permission_classes = (IsAuthenticated,)
+    renderer_classes = (BarJSONRenderer,)
+    serializer_class = BarSerializer
+
+    def delete(self, request, bar_slug=None):
+        profile = self.request.user.profile
+        serializer_context = {'request': request}
+
+        try:
+            bar = Bar.objects.get(slug=bar_slug)
+        except Bar.DoesNotExist:
+            raise NotFound('An bar with this slug was not found.')
+
+        profile.unfavorite(bar)
+
+        serializer = self.serializer_class(bar, context=serializer_context)
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def post(self, request, bar_slug=None):
+        profile = self.request.user.profile
+        serializer_context = {'request': request}
+
+        try:
+            bar = Bar.objects.get(slug=bar_slug)
+        except Bar.DoesNotExist:
+            raise NotFound('An bar with this slug was not found.')
+
+        profile.favorite(bar)
+
+        serializer = self.serializer_class(bar, context=serializer_context)
+
+        return Response(serializer.data, status=status.HTTP_201_CREATED)

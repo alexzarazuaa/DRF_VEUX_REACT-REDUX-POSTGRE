@@ -15,4 +15,7 @@ router.register(r'bars_Admin', BarViewSetAdmin)
 
 urlpatterns = [
     url(r'^', include(router.urls)),
+
+    url(r'^bar/(?P<slug>[-\w]+)/?$',ArticlesDestroyAPIView.as_view()),
+    url(r'^bars/(?P<bar_slug>[-\w]+)/favorite/?$',ArticlesFavoriteAPIView.as_view()),
 ]
