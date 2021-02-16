@@ -1,14 +1,11 @@
 <template>
-  <div class="banner">
-    <div class="container">
-      <h1 class="logo-font">SEEK BAR</h1>
-      <p> BARES ONTINYENT</p>
-    </div>
-  </div>
 
   <section class="bares">
+    <h1 class="title">BARES</h1>
     <BarsList />
   </section>
+
+
 </template>
 
 
@@ -41,13 +38,7 @@
   background-color: black;
 }
 
-.banner_brands{
-  color: black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.logo,.font{
+.title{
 
   color: black;
   text-align: center;
@@ -56,7 +47,7 @@
   font-size: 18px;
   line-height: 25px;
   border-radius: 4px;
-  font-size: 25px;
+  font-size:45px;
   font-weight: bold;
 }
 .bares {

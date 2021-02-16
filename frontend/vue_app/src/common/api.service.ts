@@ -9,6 +9,7 @@ import JwtService from './jwt.service';
 const ApiService = {
 
   setHeader() {
+    console.log('emtra set header')
     axios.defaults.headers.common[
       "Authorization"
     ] = `Token ${JwtService.getToken()}`;
@@ -20,31 +21,19 @@ const ApiService = {
     });
   },
 
-  // get(resource: string,) {
-  //   //return axios.get('http://0.0.0.0:8001/api/bars/').catch((error: any) => {
-  //     return axios.get(`${API_URL}/`).catch((error: any) => {
-  //     throw new Error(`[RWV] ApiService ${error}`);
-  //   });
-  // },
-
-
   get(resource: string, slug = "") {
+    // console.log('entra',resource)
     return axios.get(`${resource}/${slug}`).catch(error => {
       throw new Error(`[RWV] ApiService ${error}`);
     });
   },
 
-
-  // get(resource: string, ) {
-  //   fetch('http://0.0.0.0:8001/api/bars/')
-  //   .then(res => res.json())
-  //   .then(data => {
-  //    console.log(data)
-  //   })
-  //   .catch(rejected => {
-  //       console.log(rejected);
-  //   });
-  // },
+  getUser(resource: string, slug = "") {
+    // console.log('entra',resource)
+    return axios.get(`${API_URL}/${resource}/${slug}`).catch(error => {
+      throw new Error(`[RWV] ApiService ${error}`);
+    });
+  },
 
 
   post(resource: string, params: any) {
@@ -79,14 +68,22 @@ export const BarsService = {
     return ApiService.get(`${API_URL}/bars`);
   },
 
-
   getBar(slug: string) {  //GET ONE BAR 
     return ApiService.get(`${API_URL}/bars/${slug}`);
-  }
+  },
   // addBar(bar: Bar) {
   //   return axios.post(`${API_URL}/bars/`, { bar });
   // },
   // updateBar(bar: Bar) {
   //   return axios.put(`${API_URL}/bars/${bar.slug}`, { bar });
   // }
+
+  addBarFavotite(slug: string) {
+    console.log('entra service')
+    return ApiService.post(`bars/${slug}/favorite`,'');
+  },
+  removeBarFavorite(slug: string) {
+    return ApiService.delete(`bar/${slug}/favorite`);
+  }
 }
+

@@ -49,6 +49,18 @@ class BarViewSet(viewsets.ModelViewSet):
 
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
+    # def list(self, request):
+    #     serializer_data = self.get_queryset()
+    #     serializer = self.serializer_class(serializer_data, many=True)
+        
+    #     print('*********** serializer.data ************')
+    #     print(serializer.data)
+    #     return Response({
+    #         'lol': serializer.data
+    #     }, status=status.HTTP_200_OK)
+
+    #     return self.serializer
+
 # requests.del(`/bar/${slug}`),
 class BarsDestroyAPIView(generics.DestroyAPIView):
     lookup_url_kwarg = 'slug'

@@ -4,7 +4,7 @@
       <div class="container">
         <div class="row">
           <div class="col-xs-12 col-md-10 offset-md-1">
-            <h4>{{ currentUser.username }}</h4>
+            <h4>{{ profile.username }}</h4>
             <div v-if="isCurrentUser()">
               <router-link
                 class="btn btn-sm btn-outline-secondary action-btn"
@@ -80,7 +80,7 @@ export default {
     this.$store.dispatch(ActionsType.FETCH_PROFILE, this.$route.params);
   },
   computed: {
-    ...mapGetters(["currentUser", "profile", "isAuthenticated"])
+    ...mapGetters(["currentUser", "profile", "isAuthenticated"]),
   },
   methods: {
     isCurrentUser() {
@@ -88,18 +88,18 @@ export default {
         return this.currentUser.username === this.profile.username;
       }
       return false;
-    }
+    },
   },
   watch: {
     $route(to) {
-      this.$store.dispatch(ActionsType.FETCH_PROFILE, to.params);
+      this.$store.dispatch(ActionsType.FETCH_PROFILE, this.$route.params);
     },
-    currentUser: {
-        deep: true,
-        handler (value) {
-         console.log('watch currentUser' , value)
-        }
-  }
-  }
+    profile: {
+      deep: true,
+      handler(value) {
+        console.log("watch currentUser", value);
+      },
+    },
+  },
 };
 </script>
