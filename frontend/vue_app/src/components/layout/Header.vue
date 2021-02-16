@@ -29,12 +29,20 @@ import { ActionsType } from "@/store/actions.type";
 import { mapGetters } from "vuex";
 export default {
     name: "Header",
+
+    mounted() {
+        this.VAL_TOKEN()
+    },
+
     computed: {
       ...mapGetters(["currentUser", "isAuthenticated"])
     },
     methods: {
       logout() {
         this.$store.dispatch(ActionsType.LOGOUT);
+      },
+      VAL_TOKEN(){
+       this.$store.dispatch(ActionsType.CHECK_AUTH);
       }
     },
      watch: {

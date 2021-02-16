@@ -1,61 +1,98 @@
 <template>
-  <div class="bar-details">
-    <div class="bar-main">
-
-      <div class="bar-info">
+  <section class="bar-details">
+    <article class="bar-main">
+      <article class="bar-info">
         <h1 class="bar-title">{{ bar.name }}</h1>
-      </div>
-    </div>
-  
-    <div class="bar-description">
-        <h3>Description</h3>
-        <p>{{ bar.description }}</p>
-    </div>
-       <div class="bar-owner">
-        <h3>Owner</h3>
-        <p>{{ bar.owner.username }}</p>
-    </div>
-  </div>
+      </article>
+    </article>
+
+    <article class="bar-description">
+      <h3>Description</h3>
+      <p>{{ bar.description }}</p>
+    </article>
+
+    <article class="bar-buttons">
+      <button
+        @click="toggleFavorite"
+        :class="toggleFavoriteButtonClasses"
+        style="font-size:24px"
+      >
+        <i class="fa fa-heart"></i>
+      </button>
+    </article>
+
+    <article class="bar-buttons">
+      <button @click="Reserva" style="font-size:24px">
+        <span>RESERVAR</span>
+      </button>
+    </article>
+    <article class="bar-owner">
+      <h3>Owner</h3>
+      <p>{{ bar.owner.username }}</p>
+    </article>
+  </section>
 </template>
 
-
-
 <script>
-
 import store from "@/store";
 import { mapGetters } from "vuex";
 import { ActionsType } from "@/store/actions.type";
 export default {
-  name: 'Bar',
+  name: "Bar",
   props: {
     slug: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   beforeRouteEnter(to, from, next) {
-    Promise.all([
-      store.dispatch(ActionsType.FETCH_BAR, to.params.slug)
-    ]).then(() => {
-      next();
-      console.log(to.params.slug)
-    });
+    Promise.all([store.dispatch(ActionsType.FETCH_BAR, to.params.slug)]).then(
+      () => {
+        next();
+        console.log(to.params);
+      }
+    );
   },
   computed: {
-      ...mapGetters(['bar']),
+    ...mapGetters(["bar", "isAuthenticated"]),
+    toggleFavoriteButtonClasses() {
+      return {
+        "btn-primary": this.bar.favorited,
+        "btn-outline-primary": !this.bar.favorited,
+      };
+    },
   },
-    watch: {
+  methods: {
+    toggleFavorite() {
+      if (!this.isAuthenticated) {
+              console.log(this.bar)
+        this.$router.push({ name: "Login" });
+        return;
+      }
+      console.log(this.bar)
+      const action = this.bar.favorited
+        ? ActionsType.FAVORITE_REMOVE
+        : ActionsType.FAVORITE_ADD;
+      console.log(this.bar.slug);
+      this.$store.dispatch(action, this.bar.slug);
+    },
+    Reserva() {
+      if (!this.isAuthenticated) {
+        this.$router.push({ name: "Login" });
+        return;
+      }
+    },
+  },
+  watch: {
     bar: {
       deep: true,
-      handler (value) {
-        console.log('watch a bar' , value)
-      }
-    }
-    }
+      handler(value) {
+        console.log("watch a bar", value);
+      },
+    },
+  },
 };
 </script>
-
-
 
 <style>
 .bar-details {
@@ -66,7 +103,7 @@ export default {
   align-items: center;
 }
 .bar-main {
-  margin-top: 80px;
+  margin-top: 30px;
   width: 70%;
   display: flex;
   justify-content: space-around;
@@ -82,15 +119,19 @@ export default {
   width: 50%;
   text-align: center;
 }
+
+.buttons {
+  width: 10%;
+}
 .bar-title {
   text-transform: capitalize;
   color: black;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  align-content:center;
-  font-size:32px;
-  font-width:bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  font-size: 32px;
+  font-width: bold;
   font-family: "Lucida Console", "Courier New", monospace;
 }
 .bar-price {
@@ -98,25 +139,28 @@ export default {
   font-size: 1.2em;
 }
 
-.bar-description h3  , .bar-owner h3{
+.bar-description h3,
+.bar-owner h3 {
   margin-top: 10px;
-  justify-content:center;
-  align-items:center;
-  align-content:center;
-  font-size:22px;
-  font-width:bold;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  font-size: 22px;
+  font-width: bold;
 }
 
-.bar-description, .bar-owner {
+.bar-description,
+.bar-owner {
   width: 65%;
-  margin-top: 30px;
+  margin-top: 10px;
   margin-bottom: 50px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-.bar-description p  , .bar-owner p{
+.bar-description p,
+.bar-owner p {
   margin-top: 10px;
 }
 </style>

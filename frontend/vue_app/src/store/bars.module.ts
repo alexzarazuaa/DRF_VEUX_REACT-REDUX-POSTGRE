@@ -48,18 +48,20 @@ const mutations = {
   [MutationsType.FETCH_START](state: any) {
     state.IsLoading = true;
   },
-  [MutationsType.FETCH_END](state: any, { bars, barsCount }: any) {
-    state.Bars = bars;
+  [MutationsType.FETCH_END](state: any, { results, barsCount }: any) {
+    console.log(results)
+    state.Bars = results;
     state.BarsCount = barsCount;
     state.isLoading = false;
   },
   [MutationsType.UPDATE_BAR_IN_LIST](state: any, data: any) {
     state.Bars = state.Bars.map((bar: any) => {
+      console.log(data,'data')
       if (bar.slug !== data.slug) {
         return bar;
       }
-      // article.favorited = data.favorited;
-      // article.favoritesCount = data.favoritesCount;
+       bar.favorited = data.favorited;
+       bar.favoritesCount = data.favoritesCount;
       return bar;
     });
   }

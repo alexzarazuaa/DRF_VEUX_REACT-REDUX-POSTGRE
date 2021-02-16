@@ -14,16 +14,18 @@ const getters = {
 };
 
 const actions = {
-  [ActionsType.FETCH_PROFILE](context: any, payload: any) {
-    const { username } = payload;
-    return ApiService.get("profils", username)
+  [ActionsType.FETCH_PROFILE](context: any  , username: string) {
+    return ApiService.get("profiles", username)
       .then(({ data }) => {
-        context.commit(MutationsType.SET_PROFILE, data.profile);
+        console.log('entra ',data)
+        context.commit(MutationsType.SET_PROFILE, data);
+        console.log(data)
         return data;
       })
       .catch((response) => {
+        console.log(response)
         // #todo SET_ERROR cannot work in multiple states
-        context.commit(MutationsType.SET_ERROR, response.data.errors)
+        //context.commit(MutationsType.SET_ERROR, response.data.errors)
       });
   }
   
