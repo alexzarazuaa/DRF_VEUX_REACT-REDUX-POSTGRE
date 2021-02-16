@@ -1,0 +1,53 @@
++++++++++++++++++++++++++ Bars  ++++++++++++++++++++++++++++++++++++++
+
+LIST -> GET
+http://0.0.0.0:8001/api/bars
+
+RETRIEVE -> GET
+http://0.0.0.0:8001/api/bars/Baden_Baden
+
+-------------------------  End Bars  ---------------------------------
+
+
+
+
++++++++++++++++++++++++++ Authentication  ++++++++++++++++++++++++++++
+
+Register -> POST
+http://0.0.0.0:8001/api/users
+{
+    "user":{
+        "username": "vicent",
+        "email":"vicent@gmail.com",
+        "password":"123456789"
+    }
+}
+
+Login -> POST
+http://0.0.0.0:8001/api/users/login
+{
+    "user":{
+        "email":"vicent@gmail.com",
+        "password":"123456789"
+    }
+}
+
+Update -> PUT (Authorization)
+http://0.0.0.0:8001/api/user
+{
+    "user":{
+        "username": "vicent1"
+    }
+}
+
+Retrieve -> GET (Authorization)
+http://0.0.0.0:8001/api/user
+
+List -> GET (Admin)
+http://0.0.0.0:8001/api/userlist
+
+Retrieve -> GET (Admin)
+http://0.0.0.0:8001/api/userdetail/yomogan
+
+
+------------------------- End Authentication  ------------------------
