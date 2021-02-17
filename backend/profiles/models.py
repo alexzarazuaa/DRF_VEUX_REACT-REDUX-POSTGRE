@@ -16,6 +16,9 @@ class Profile(TimestampedModel):
         related_name='favorited_by'
     )
 
+    reference_booking = models.ManyToManyField('bars.Bar', through='Booking')
+
+
     def favorite(self, bar):
         """Favorite `bar` if we haven't already favorited it."""
         self.favorites.add(bar)
@@ -27,3 +30,8 @@ class Profile(TimestampedModel):
     def has_favorited(self, bar):
         """Returns True if we have favorited `bar`; else False."""
         return self.favorites.filter(pk=bar.pk).exists()
+
+class Booking(models.Model):
+    person = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    bar = models.ForeignKey('bars.Bar', on_delete=models.CASCADE)
+    date_joined = models.DateField()
