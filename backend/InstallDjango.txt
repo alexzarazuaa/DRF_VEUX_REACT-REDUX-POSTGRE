@@ -1,34 +1,60 @@
--------------------------Create project---------------------
++++++++++++++++++++++++++  Create project  +++++++++++++++++++++++++++++
+
 sudo docker-compose run web django-admin startproject config .
 sudo chmod -R 777 .
 sudo docker-compose up
 
 https://docs.docker.com/compose/django/
 
--------------------------End Create project---------------------
+-------------------------  End Create project  -------------------------
 
--------------------------Create app---------------------
+
+
+
++++++++++++++++++++++++++  Start Project  ++++++++++++++++++++++++++++++
 
 sudo docker-compose up
+
+-------------------------  End Start Project   -------------------------
+
+
+
+
++++++++++++++++++++++++++  Create app  +++++++++++++++++++++++++++++++++
+
 sudo docker exec -it backend_web_1 sh
 python3 manage.py startapp profiles
 sudo chmod -R 777 .
-(a todo el backend)
 
-////////////////////////////////////////////////////////////////////////////////
-sudo docker exec -it backend_web_1 sh
+-------------------------  End Create app  -----------------------------
+
+
+
+
++++++++++++++++++++++++++ Create Migrations  +++++++++++++++++++++++++++
+
+sudo docker exec +it backend_web_1 sh
 python3 manage.py makemigrations
 python3 manage.py migrate
-python3 manage.py createsuperuser -> yomogan/yomogan@gmail.com/drf-react-redux
-    - Type `exit` to leave the sh session
-///////////////////////////////////////////////////////////
+
+------------------------- End Create Migrations ------------------------
 
 
--------------------------End Create app---------------------
 
---------------------------- ALL PORTS ---------------------------------------
+
++++++++++++++++++++++++++ Create Superuser +++++++++++++++++++++++++++++
+
+python3 manage.py createsuperuser
+
+------------------------- End Create Superuser -------------------------
+
+
+
+
++++++++++++++++++++++++++++ PORTS ++++++++++++++++++++++++++++++++++++++
 
 http://localhost:8001/
 
+--------------------------- PORTS --------------------------------------
 
 
