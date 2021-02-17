@@ -49,19 +49,8 @@ class BarViewSet(viewsets.ModelViewSet):
 
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-    # def list(self, request):
-    #     serializer_data = self.get_queryset()
-    #     serializer = self.serializer_class(serializer_data, many=True)
-        
-    #     print('*********** serializer.data ************')
-    #     print(serializer.data)
-    #     return Response({
-    #         'lol': serializer.data
-    #     }, status=status.HTTP_200_OK)
 
-    #     return self.serializer
 
-# requests.del(`/bar/${slug}`),
 class BarsDestroyAPIView(generics.DestroyAPIView):
     lookup_url_kwarg = 'slug'
     permission_classes = (IsAuthenticatedOrReadOnly,)
@@ -109,3 +98,44 @@ class BarsFavoriteAPIView(APIView):
         serializer = self.serializer_class(bar, context=serializer_context)
 
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+class BarsBookViewSet(mixins.CreateModelMixin, 
+                     mixins.ListModelMixin,
+                     mixins.RetrieveModelMixin,
+                     viewsets.GenericViewSet):
+                     
+    # lookup_field = 'slug'
+    queryset = Bar.objects.select_related('author', 'author__user')
+    renderer_classes = (BarJSONRenderer,)
+    serializer_class = BarSerializer
+    permission_classes = [IsAuthenticated]
+
+    def create(self, request, bar_slug):
+
+        try:
+            bar = Bar.objects.get(slug=bar_slug)
+        except Bar.DoesNotExist:
+            raise NotFound('An bar with this slug was not found.')
+
+        time = request.data.get('time')
+
+        profile = self.request.user.profile
+        profile.book(bar, time)
+
+        serializer = self.serializer_class(bar, context={'request': request})
+
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+    def retrieve(self, request, bar_slug , *args, **kwargs):
+        print("-------------------------------")
+        self.permission_classes = (IsAdminUser)
+
+        try:
+            bar = Bar.objects.get(slug=bar_slug)
+        except Bar.DoesNotExist:
+            raise NotFound('An bar with this slug was not found.')
+
+        serializer = self.serializer_class(bar, context={'request': request})
+ 
+
+        return Response(serializer.data, status=status.HTTP_200_OK)

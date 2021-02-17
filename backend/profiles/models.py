@@ -16,7 +16,10 @@ class Profile(TimestampedModel):
         related_name='favorited_by'
     )
 
-    reference_booking = models.ManyToManyField('bars.Bar', through='Booking')
+    reference_booking = models.ManyToManyField(
+        'bars.Bar', 
+        through='Booking',
+        related_name='booking_by')
 
 
     def favorite(self, bar):
@@ -31,7 +34,14 @@ class Profile(TimestampedModel):
         """Returns True if we have favorited `bar`; else False."""
         return self.favorites.filter(pk=bar.pk).exists()
 
+    def book(self, bar, time):
+        """Book `bar` """
+        self.reference_booking.add(bar, through_defaults={'time':time})
+
+
 class Booking(models.Model):
     person = models.ForeignKey(Profile, on_delete=models.CASCADE)
     bar = models.ForeignKey('bars.Bar', on_delete=models.CASCADE)
-    date_joined = models.DateField()
+    time = models.TextField(blank=True)
+
+

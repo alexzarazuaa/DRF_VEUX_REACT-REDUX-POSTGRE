@@ -14,6 +14,10 @@ class BarSerializer(serializers.ModelSerializer):
         method_name='get_favorites_count'
     )
 
+    bookingsCount = serializers.SerializerMethodField(
+        method_name='get_bookings_count'
+    )
+
     # Django REST Framework makes it possible to create a read-only field that
     # gets it's value by calling a function. In this case, the client expects
     # `created_at` to be called `createdAt` and `updated_at` to be `updatedAt`.
@@ -31,6 +35,7 @@ class BarSerializer(serializers.ModelSerializer):
             'owner',
             'favorited',
             'favoritesCount',
+            'bookingsCount',
             'createdAt',
             'updatedAt',
         )
@@ -63,3 +68,5 @@ class BarSerializer(serializers.ModelSerializer):
     def get_favorites_count(self, instance):
         return instance.favorited_by.count()
 
+    def get_bookings_count(self, instance):
+        return instance.booking_by.count()
