@@ -9,7 +9,6 @@ import JwtService from './jwt.service';
 const ApiService = {
 
   setHeader() {
-    console.log('emtra set header')
     axios.defaults.headers.common[
       "Authorization"
     ] = `Token ${JwtService.getToken()}`;
@@ -37,7 +36,7 @@ const ApiService = {
 
 
   post(resource: string, params: any) {
-    console.log(resource)
+    // console.log(resource)
     return axios.post(`${API_URL}/${resource}`, params);
   },
 
@@ -50,7 +49,8 @@ const ApiService = {
   },
 
   delete(resource: string) {
-    return axios.delete(resource).catch((error: any) => {
+    console.log(resource,'delete bar')
+    return axios.delete(`${API_URL}/${resource}`).catch((error: any) => {
       throw new Error(`[RWV] ApiService ${error}`);
     });
   }
@@ -78,12 +78,12 @@ export const BarsService = {
   //   return axios.put(`${API_URL}/bars/${bar.slug}`, { bar });
   // }
 
-  addBarFavotite(slug: string) {
-    console.log('entra service')
+  addBarFavorite(slug: string) {
+    // console.log('entra service')
     return ApiService.post(`bars/${slug}/favorite`,'');
   },
   removeBarFavorite(slug: string) {
-    return ApiService.delete(`bar/${slug}/favorite`);
+    return ApiService.delete(`bars/${slug}/favorite`);
   }
 }
 

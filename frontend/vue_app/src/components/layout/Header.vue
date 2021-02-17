@@ -8,7 +8,6 @@
 
 
       <div class="navbar">
-        <router-link to="/home">Home</router-link>
         <router-link to="/bares">Bares</router-link>
         <router-link to="/contact">Contact</router-link>
         <router-link  v-if="!isAuthenticated" to="/login">Login</router-link>
@@ -45,14 +44,14 @@ export default {
        this.$store.dispatch(ActionsType.CHECK_AUTH);
       }
     },
-     watch: {
-        currentUser: {
-          deep: true,
-          handler (value) {
-            console.log('watch currentUser' , value)
-          }
-    }
-  }
+  //    watch: {
+  //       currentUser: {
+  //         deep: true,
+  //         handler (value) {
+  //           console.log('watch currentUser' , value)
+  //         }
+  //   }
+  // }
 }
 
 </script>

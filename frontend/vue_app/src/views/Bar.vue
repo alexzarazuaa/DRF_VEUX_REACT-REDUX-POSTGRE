@@ -14,10 +14,13 @@
     <article class="bar-buttons">
       <button
         @click="toggleFavorite"
-        :class="toggleFavoriteButtonClasses"
-        style="font-size:24px"
+        :class="{
+        'btn-primary': bar.favorited,
+        'btn-outline-primary': !bar.favorited
+      }"
       >
-        <i class="fa fa-heart"></i>
+      <i class="ion-heart"></i>
+      <span class="counter"> {{ bar.favoritesCount }} </span>
       </button>
     </article>
 
@@ -26,6 +29,8 @@
         <span>RESERVAR</span>
       </button>
     </article>
+
+    
     <article class="bar-owner">
       <h3>Owner</h3>
       <p>{{ bar.owner.username }}</p>
@@ -49,7 +54,6 @@ export default {
     Promise.all([store.dispatch(ActionsType.FETCH_BAR, to.params.slug)]).then(
       () => {
         next();
-        console.log(to.params);
       }
     );
   },
@@ -65,7 +69,6 @@ export default {
   methods: {
     toggleFavorite() {
       if (!this.isAuthenticated) {
-              console.log(this.bar)
         this.$router.push({ name: "Login" });
         return;
       }
@@ -73,7 +76,6 @@ export default {
       const action = this.bar.favorited
         ? ActionsType.FAVORITE_REMOVE
         : ActionsType.FAVORITE_ADD;
-      console.log(this.bar.slug);
       this.$store.dispatch(action, this.bar.slug);
     },
     Reserva() {
@@ -90,7 +92,7 @@ export default {
         console.log("watch a bar", value);
       },
     },
-  },
+ },
 };
 </script>
 
@@ -122,6 +124,15 @@ export default {
 
 .buttons {
   width: 10%;
+}
+.btn-primary{
+   background-color: coral;
+    color: red;
+}
+
+.btn-outline-primary{
+  background-color: green;
+    color: whitesmokeΰ;
 }
 .bar-title {
   text-transform: capitalize;
