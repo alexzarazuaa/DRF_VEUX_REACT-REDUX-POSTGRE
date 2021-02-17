@@ -23,20 +23,23 @@ class Profile(TimestampedModel):
 
 
     def favorite(self, bar):
-        """Favorite `bar` if we haven't already favorited it."""
         self.favorites.add(bar)
 
     def unfavorite(self, bar):
-        """Unfavorite `bar` if we've already favorited it."""
         self.favorites.remove(bar)
 
     def has_favorited(self, bar):
-        """Returns True if we have favorited `bar`; else False."""
         return self.favorites.filter(pk=bar.pk).exists()
 
     def book(self, bar, time):
-        """Book `bar` """
         self.reference_booking.add(bar, through_defaults={'time':time})
+    
+    def unbook(self, bar):
+        self.reference_booking.remove(bar)
+        
+    def modbook(self, bar):
+        self.reference_booking.remove(bar)
+        
 
 
 class Booking(models.Model):

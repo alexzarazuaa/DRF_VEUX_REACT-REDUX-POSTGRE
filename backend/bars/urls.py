@@ -17,6 +17,8 @@ router.register(r'bars_Admin', BarViewSetAdmin)
 BookBar = BarsBookViewSet.as_view({
     'post': 'create',
     'get': 'retrieve',
+    'delete': 'delete',
+
 })
 
 urlpatterns = [
@@ -24,5 +26,6 @@ urlpatterns = [
 
     url(r'^bar/(?P<slug>[-\w]+)/?$',BarsDestroyAPIView.as_view()),
     url(r'^bars/(?P<bar_slug>[-\w]+)/favorite/?$',BarsFavoriteAPIView.as_view()),
-    url(r'^bars/(?P<bar_slug>[-\w]+)/book/?$', BookBar, name='BookBar'),    
+    url(r'^bars/(?P<bar_slug>[-\w]+)/book/?$', BookBar, name='BookBar'),
+
 ]
