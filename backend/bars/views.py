@@ -127,8 +127,6 @@ class BarsBookViewSet(mixins.CreateModelMixin,
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def retrieve(self, request, bar_slug , *args, **kwargs):
-        print("-------------------------------")
-        self.permission_classes = (IsAdminUser)
 
         try:
             bar = Bar.objects.get(slug=bar_slug)
