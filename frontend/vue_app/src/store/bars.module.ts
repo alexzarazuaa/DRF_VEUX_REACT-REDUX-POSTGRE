@@ -34,7 +34,7 @@ const actions = {
     commit(MutationsType.FETCH_START);
     return BarsService.getBars()
       .then(({ data }: any) => {
-        console.log(data)
+        // console.log(data)
         commit(MutationsType.FETCH_END, data);
       })
       .catch((error: any) => {
@@ -49,14 +49,15 @@ const mutations = {
     state.IsLoading = true;
   },
   [MutationsType.FETCH_END](state: any, { results, barsCount }: any) {
-    console.log(results)
+    // console.log(results)
     state.Bars = results;
     state.BarsCount = barsCount;
     state.isLoading = false;
   },
   [MutationsType.UPDATE_BAR_IN_LIST](state: any, data: any) {
+    // console.log(data)
     state.Bars = state.Bars.map((bar: any) => {
-      console.log(data,'data')
+      console.log(data,'data','---->',bar)
       if (bar.slug !== data.slug) {
         return bar;
       }

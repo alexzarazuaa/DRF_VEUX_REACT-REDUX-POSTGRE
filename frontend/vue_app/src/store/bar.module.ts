@@ -24,17 +24,20 @@ export const actions = {
     return data;
   },
   async [ActionsType.FAVORITE_ADD](context: any, barSlug: any) {
-    console.log('entra favorite action')
-    const { data } = await BarsService.addBarFavotite(barSlug);
+    console.log('lo hara favorito')
+    const { data } = await BarsService.addBarFavorite(barSlug);
     console.log(data)
-    context.commit(MutationsType.SET_BAR, data);
+    //ontext.commit(MutationsType.UPDATE_BAR_IN_LIST, data, { root: true });
+     context.commit(MutationsType.SET_BAR, data);
   },
   async [ActionsType.FAVORITE_REMOVE](context: any, barSlug: any) {
+    console.log('entra borra fav')
     const { data } = await BarsService.removeBarFavorite(barSlug);
      console.log(data)
     // Update list as well. This allows us to favorite an article in the Home view.
     context.commit(MutationsType.SET_BAR, data);
   },
+
 };
 
 /* eslint no-param-reassign: ["error", { "props": false }] */
