@@ -1,9 +1,9 @@
 +++++++++++++++++++++++++ Bars  ++++++++++++++++++++++++++++++++++++++
 
-LIST -> GET
+List -> GET
 http://0.0.0.0:8001/api/bars
 
-RETRIEVE -> GET
+Retrieve -> GET
 http://0.0.0.0:8001/api/bars/Baden_Baden
 
 -------------------------  End Bars  ---------------------------------
@@ -46,8 +46,18 @@ http://0.0.0.0:8001/api/user
 List -> GET (Admin)
 http://0.0.0.0:8001/api/userlist
 
-Retrieve -> GET (Admin)
-http://0.0.0.0:8001/api/userdetail/yomogan
-
 
 ------------------------- End Authentication  ------------------------
+
+
+
+
++++++++++++++++++++++++++ Profile  +++++++++++++++++++++++++++++++++++
+
+Retrieve -> GET
+http://0.0.0.0:8001/api/profiles/vicent
+
+List -> GET (Admin)
+http://0.0.0.0:8001/api/profilelist
+
+------------------------- End Profile  -------------------------------

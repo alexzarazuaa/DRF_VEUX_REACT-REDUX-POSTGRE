@@ -13,7 +13,6 @@ router = DefaultRouter()
 
 #Admin
 router.register(r'^userlist', UserViewSet)
-router.register(r'^userdetail', UserViewSet)
 
 
 urlpatterns = [
@@ -23,7 +22,4 @@ urlpatterns = [
     url(r'^user/?$', UserRetrieveUpdateAPIView.as_view()),
     url(r'^users/?$', RegistrationAPIView.as_view()),
     url(r'^users/login/?$', LoginAPIView.as_view()),
-
-    #Admin                               
-    # url(r'^userdetail/(?P<username>[0-9a-zA-Z_-]+)/$', UserViewSet.as_view( {'get': 'retrieve'} ))
 ]
