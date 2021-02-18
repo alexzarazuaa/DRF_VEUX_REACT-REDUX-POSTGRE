@@ -6,6 +6,7 @@ from rest_framework.permissions import (
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from core.permissions import IsOwnerOrAdmin
 from .models import Bar
 from .renderers import BarJSONRenderer
 from .serializers import BarSerializer
@@ -110,7 +111,17 @@ class BarsBookViewSet(mixins.CreateModelMixin,
     serializer_class = BarSerializer
     permission_classes = [IsAuthenticated]
 
+    def get_permissions(self):
+
+        if self.request.method == 'GET':
+            self.permission_classes = [IsOwnerOrAdmin, ]
+        else:
+            self.permission_classes = [IsAuthenticated, ]
+
+        return super(BarsBookViewSet, self).get_permissions()
+
     def create(self, request, bar_slug):
+
         try:
             bar = Bar.objects.get(slug=bar_slug)
         except Bar.DoesNotExist:
@@ -130,10 +141,11 @@ class BarsBookViewSet(mixins.CreateModelMixin,
             bar = Bar.objects.get(slug=bar_slug)
         except Bar.DoesNotExist:
             raise NotFound('An bar with this slug was not found.')
+        
+        self.check_object_permissions(request, bar)
 
         serializer = self.serializer_class(bar, context={'request': request})
  
-
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def delete(self, request, bar_slug=None):
