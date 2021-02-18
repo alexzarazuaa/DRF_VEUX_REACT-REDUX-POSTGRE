@@ -12,15 +12,14 @@
     </article>
 
     <article class="bar-buttons">
-      <button
-        @click="toggleFavorite"
-        :class="{
-        'btn-primary': bar.favorited,
-        'btn-outline-primary': !bar.favorited
-      }"
-      >
-      <i class="ion-heart"></i>
-      <span class="counter"> {{ bar.favoritesCount }} </span>
+      <button  class="btn-primary" v-if="bar.favorited" @click="toggleFavorite">
+        <i class="ion-heart"></i>&nbsp; &nbsp; &nbsp;
+        <span class="counter"> {{ bar.favoritesCount }} </span>
+      </button>
+
+      <button class="btn-outline-primary" v-else @click="toggleFavorite">
+        <i class="ion-heart"></i>&nbsp; &nbsp; &nbsp;
+        <span class="counter"> {{ bar.favoritesCount }} </span>
       </button>
     </article>
 
@@ -30,7 +29,6 @@
       </button>
     </article>
 
-    
     <article class="bar-owner">
       <h3>Owner</h3>
       <p>{{ bar.owner.username }}</p>
@@ -57,14 +55,15 @@ export default {
       }
     );
   },
+  // beforeUpdate() {
+  //   console.log("beforeUpdate");
+  //   return {
+  //     "btn-primary": this.bar.favorited,
+  //     "btn-outline-primary": !this.bar.favorited,
+  //   };
+  // },
   computed: {
     ...mapGetters(["bar", "isAuthenticated"]),
-    toggleFavoriteButtonClasses() {
-      return {
-        "btn-primary": this.bar.favorited,
-        "btn-outline-primary": !this.bar.favorited,
-      };
-    },
   },
   methods: {
     toggleFavorite() {
@@ -72,10 +71,13 @@ export default {
         this.$router.push({ name: "Login" });
         return;
       }
-      console.log(this.bar)
+      console.log(this.bar);
       const action = this.bar.favorited
         ? ActionsType.FAVORITE_REMOVE
         : ActionsType.FAVORITE_ADD;
+
+      //   (ActionsType.FAVORITE_REMOVE, "btn-outline-primary")
+      // : (ActionsType.FAVORITE_REMOVE, "btn-primary");
       this.$store.dispatch(action, this.bar.slug);
     },
     Reserva() {
@@ -92,7 +94,7 @@ export default {
         console.log("watch a bar", value);
       },
     },
- },
+  },
 };
 </script>
 
@@ -125,14 +127,19 @@ export default {
 .buttons {
   width: 10%;
 }
-.btn-primary{
-   background-color: coral;
-    color: red;
+.btn-primary {
+  background-color: coral;
+  color: red;
 }
 
-.btn-outline-primary{
+.btn-outline-primary {
   background-color: green;
-    color: whitesmokeΰ;
+  color: whitesmokeΰ;
+}
+.counter,
+.ion-heart {
+  font-size: 25px;
+  font-weight: bold;
 }
 .bar-title {
   text-transform: capitalize;

@@ -27,6 +27,13 @@ const ApiService = {
     });
   },
 
+  getProfile(resource: string, params: any) {
+     console.log('entra',resource)
+    return axios.get(`${API_URL}/${resource}`,params).catch(error => {
+      throw new Error(`[RWV] ApiService ${error}`);
+    });
+  },
+
   getUser(resource: string, slug = "") {
     // console.log('entra',resource)
     return axios.get(`${API_URL}/${resource}/${slug}`).catch(error => {

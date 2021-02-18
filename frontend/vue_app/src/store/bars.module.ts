@@ -55,7 +55,7 @@ const mutations = {
     state.isLoading = false;
   },
   [MutationsType.UPDATE_BAR_IN_LIST](state: any, data: any) {
-    // console.log(data)
+     console.log(data)
     state.Bars = state.Bars.map((bar: any) => {
       console.log(data,'data','---->',bar)
       if (bar.slug !== data.slug) {

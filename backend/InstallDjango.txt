@@ -33,7 +33,7 @@ sudo chmod -R 777 .
 
 +++++++++++++++++++++++++ Create Migrations  +++++++++++++++++++++++++++
 
-sudo docker exec +it backend_web_1 sh
+sudo docker exec -it backend_web_1 sh
 python3 manage.py makemigrations
 python3 manage.py migrate
 

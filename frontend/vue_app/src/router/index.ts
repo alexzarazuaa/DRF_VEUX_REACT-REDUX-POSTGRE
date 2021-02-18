@@ -54,7 +54,6 @@ const routes: Array<RouteRecordRaw> = [
     path: "/profiles/@:username",
     name :"Profile",
     component: Profile,
-    beforeEnter: authGuard
   },
   {
     path: "/:catchAll(.*)",

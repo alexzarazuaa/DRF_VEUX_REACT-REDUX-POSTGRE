@@ -14,46 +14,19 @@ const getters = {
 };
 
 const actions = {
-  [ActionsType.FETCH_PROFILE](context: any  , username: string) {
+  [ActionsType.FETCH_PROFILE](context: any, payload: any) {
+    const { username } = payload;
     return ApiService.get("profiles", username)
       .then(({ data }) => {
-        console.log('entra ',data)
-        context.commit(MutationsType.SET_PROFILE, data);
         console.log(data)
+        context.commit(MutationsType.SET_PROFILE, data.profile);
         return data;
       })
-      .catch((response) => {
-        console.log(response)
+      .catch(() => {
         // #todo SET_ERROR cannot work in multiple states
-        //context.commit(MutationsType.SET_ERROR, response.data.errors)
+        // context.commit(SET_ERROR, response.data.errors)
       });
-  }
-  
-//   ,
-//   [ActionsType.FETCH_PROFILE_FOLLOW](context : any, payload : any) {
-//     const { username } = payload;
-//     return ApiService.post(`profiles/${username}/follow`)
-//       .then(({ data }) => {
-//         context.commit(MutationsType.SET_PROFILE, data.profile);
-//         return data;
-//       })
-//       .catch((response) => {
-//         // #todo SET_ERROR cannot work in multiple states
-//         context.commit(MutationsType.SET_ERROR, response.data.errors)
-//       });
-//   },
-//   [ActionsType.FETCH_PROFILE_UNFOLLOW](context : any , payload :  any) {
-//     const { username } = payload;
-//     return ApiService.delete(`profiles/${username}/follow`)
-//       .then(({ data }) => {
-//         context.commit(MutationsType.SET_PROFILE, data.profile);
-//         return data;
-//       })
-//       .catch((response) => {
-//         // #todo SET_ERROR cannot work in multiple states
-//         context.commit(MutationsType.SET_ERROR, response.data.errors)
-//       });;
-//   }
+  },
 };
 
 const mutations = {
