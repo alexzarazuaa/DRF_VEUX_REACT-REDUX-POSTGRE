@@ -12,6 +12,10 @@ class Bar(TimestampedModel):
     owner = models.ForeignKey(
         'profiles.Profile', on_delete=models.CASCADE, related_name='bars'
     )
+    
+    reference_booking = models.ManyToManyField('profiles.Profile', through='profiles.Booking')
+
+
 
     def __str__(self):
         return self.name

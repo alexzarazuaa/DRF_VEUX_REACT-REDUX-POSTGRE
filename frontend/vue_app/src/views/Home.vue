@@ -1,20 +1,33 @@
 <template>
-  <div class="banner">
+<section>
+    <div class="banner">
     <div class="container">
       <h1 class="logo-font"> SEEK BAR</h1>
       <p> MAKE YOUR RESERVATION IN THE BEST BARS</p>
+
+    
     </div>
+
   </div>
+    <div class="list">
+
+        <BarsList />
+      </div>
+</section>
+
+
+    
 
 </template>
 
 
 
 <script>
+ import BarsList from '@/components/BarsListComponent/BarsList'
   export default {
     name: "Home",
     components: {
-
+      BarsList
     },
   }
   
@@ -33,19 +46,12 @@
   padding: 52px;
   text-decoration: none;
 }
+
 .banner{
   background-color: black;
 }
 
-.banner_brands{
-  color: black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.logo {
-
-  color: black;
+.logo,.logo-font {
   text-align: center;
   padding: 12px;
   text-decoration: none;
@@ -54,6 +60,16 @@
   border-radius: 4px;
   font-size: 25px;
   font-weight: bold;
+}
+
+.list{
+  padding: 10px;
+  width: 100vw;
+  box-sizing: border-box;
+  padding: 50px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+
 }
 
 

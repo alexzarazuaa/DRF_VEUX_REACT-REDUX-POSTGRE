@@ -19,6 +19,21 @@ class UserViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated,)
     permission_classes = (IsAdminUser,)
 
+    def create(self, request):
+        serializer_context = {
+            'owner': request.user.profile,
+            'request': request
+        }
+        serializer_data = request.data.get('bar', {})
+
+        serializer = self.serializer_class(
+        data=serializer_data, context=serializer_context
+        )
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
 
 class RegistrationAPIView(APIView):
     # Allow any user (authenticated or not) to hit this endpoint.

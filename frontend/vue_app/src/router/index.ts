@@ -5,8 +5,15 @@ import Bares from '../views/Bares.vue';
 import Login from '../views/auth/Login.vue';
 import Bar from '../views/Bar.vue';
 import Profile from '../views/Profile.vue'
-
 import Register from '../views/auth/Register.vue';
+
+const noAuthGuard = (to: any, from: any, next: any) => {
+  (localStorage.getItem("token")) ? next("/") : next()
+}
+
+const authGuard = (to: any, from: any, next: any) => {
+  (!localStorage.getItem("token")) ? next("/login") : next()
+}
 
 
 const routes: Array<RouteRecordRaw> = [
@@ -23,7 +30,8 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/login',
     name: 'Login',
-    component: Login
+    component: Login,
+    beforeEnter: noAuthGuard
   },
   {
     path: '/bares',
@@ -39,12 +47,14 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/register',
     name: 'Register',
-    component: Register
+    component: Register,
+    beforeEnter: noAuthGuard
   },
   {
-    path: "/@:username",
+    path: "/profiles/:username",
     name :"Profile",
-    component: Profile
+    component: Profile,
+    props: true
   },
   {
     path: "/:catchAll(.*)",
