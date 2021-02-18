@@ -1,5 +1,5 @@
 <template>
-      <h1>{{profile.username}}</h1>
+  <h1>{{ profile.username }}</h1>
 </template>
 
 <script>
@@ -17,15 +17,7 @@ export default {
     next();
   },
   computed: {
-    ...mapGetters(["currentUser", "profile", "isAuthenticated"]),
-  },
-  methods: {
-    isCurrentUser() {
-      if (this.currentUser.username && this.profile.username) {
-        return this.currentUser.username === this.profile.username;
-      }
-      return false;
-    },
+    ...mapGetters(["profile"]),
   },
   watch: {
     profile: {
