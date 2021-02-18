@@ -2,32 +2,60 @@
 version: '3.3'
 
 services:
-  db:
+  postgres01:
     image: postgres:latest
     container_name: postgres01 
+    ports:
+      - "5432:5432"
     environment:
-      - POSTGRES_DB=postgres
+      - POSTGRES_DB=SeekBar
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-    ports:
-      - 5432:5432
+    networks:
+    - network
   web:
     build: ./backend
     container_name: backend_web_1
     command: python3 manage.py runserver 0.0.0.0:8001
     depends_on:
-      - db
+      - postgres01
     volumes:
-      - ./backend/:/backend
+      - ./backend/:/code
     ports:
       - "8001:8001"
+    networks:
+    - network
+
   vue:
-    build: ./frontend/vue_app
-    container_name: vue_app
+    container_name: "VueJS_container"
+    build: ./frontend/vue_app/.
+    working_dir: /app
+    command: bash -c "npm install && npm start"
     ports:
       - "8080:8080"
-    command: npm start
     volumes:
-      - "./frontend/vue:/frontend/vue"
+      - ./frontend/vue_app:/app
+    depends_on:
+      - web
+    networks:
+      - network
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "dakiti@gmail.com"
+      PGADMIN_DEFAULT_PASSWORD: "alex123456789"
+    logging:
+      driver: "none"
+    ports:
+      - 6969:80
+    depends_on:
+      - postgres01
+    networks:
+      - network
+
+networks:
+  network:
+
 
       

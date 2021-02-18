@@ -1,22 +1,23 @@
 <template>
  <section>
-<form>
+<form @submit.prevent="onSubmit">
  <h1>Sign Up</h1>
   <div class="container">
-  
-    <label for="email"><b>Email</b></label>
-    <input type="text" placeholder="Enter Email" name="email" required>
 
-    <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="psw" required>
+      <label for="username"><b>Username</b></label>
+      <input class="form-control form-control-lg" type="text" v-model="username" placeholder="Username" required />
 
-    <label for="psw-repeat"><b>Repeat Password</b></label>
-    <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
+      <label for="email"><b>Email</b></label>
+      <input class="form-control form-control-lg" type="email" v-model="email" placeholder="Email" required />
 
-    <div class="clearfix">
-      <button type="button" class="cancelbtn">Cancel</button>
-      <button type="submit" class="signupbtn">Sign Up</button>
-    </div>
+      <label for="psw"><b>Password</b></label>
+      <input class="form-control form-control-lg"  type="password" v-model="password" placeholder="password" required />
+
+        <div class="clearfix">
+          <router-link :to="{ name: 'Home' }" > <button type="button" class="cancelbtn">Cancel</button></router-link>
+          <button class="signupbtn">Sign Up</button>
+        </div>
+    
   </div>
 </form>
  </section>
@@ -24,9 +25,40 @@
 
 
 
-<script lang="ts">
-  import { Vue } from 'vue-class-component';
-  export default class Register extends Vue {}
+<script>
+  import { mapState } from "vuex";
+  import { ActionsType } from "@/store/actions.type";
+
+export default {
+  name: "Register",
+  data() {
+    return {
+      username: "",
+      email: "",
+      password: ""
+    };
+  },
+  computed: {
+    ...mapState({
+      errors: state => state.auth.errors
+    })
+  },
+  methods: {
+    onSubmit() {
+      this.$store
+        .dispatch(ActionsType.REGISTER, {
+          email: this.email,
+          password: this.password,
+          username: this.username
+        })
+        .then((response) => {
+              console.log(response);
+              this.$router.push({ name: "Home"});
+            })
+            .catch((response) => {console.log(response.data)})
+        }
+  }
+};
 </script>
 
 

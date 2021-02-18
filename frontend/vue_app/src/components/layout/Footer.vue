@@ -1,7 +1,7 @@
 <template>
 <footer>
   <div class="container">
-    <a class="logo"> © KALYPSO</a>
+    <a class="logo"> © SEEK BAR</a>
     <span class="attribution" style="background-color: black;">
     </span>
   </div>
