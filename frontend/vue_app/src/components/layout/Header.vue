@@ -9,19 +9,12 @@
         <router-link to="/bares">Bares</router-link>
         <router-link to="/contact">Contact</router-link>
         <router-link v-if="!isAuthenticated" to="/login">Login</router-link>
-        <router-link v-if="!isAuthenticated" to="/register">Register</router-link
+        <router-link v-if="!isAuthenticated" to="/register"
+          >Register</router-link
         >
-        <router-link
-          class="nav-link"
-          active-class="active"
-          exact
-          :to="{
-            name: 'Profile',
-            params: {username :currentUser.username} ,
-          }"
-        >
+        <a @click="profile(currentUser.username)">
           {{ currentUser.username }}
-        </router-link>
+        </a>
 
         <a class="Btn-logout" v-if="isAuthenticated" @click="logout">LogOut</a>
       </div>
@@ -48,6 +41,9 @@ export default {
     },
     VAL_TOKEN() {
       this.$store.dispatch(ActionsType.CHECK_AUTH);
+    },
+    profile(username) {
+      this.$router.push({ name: "Profile", params: { username: username } });
     },
   },
   //    watch: {

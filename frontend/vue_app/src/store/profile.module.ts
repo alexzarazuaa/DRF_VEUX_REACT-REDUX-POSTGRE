@@ -14,9 +14,8 @@ const getters = {
 };
 
 const actions = {
-  [ActionsType.FETCH_PROFILE](context: any, payload: any) {
-    const { username } = payload;
-    return ApiService.get("profiles", username)
+  [ActionsType.FETCH_PROFILE](context: any , username: any) {
+    return ApiService.getProfile("profiles/", username)
       .then(({ data }) => {
         console.log(data)
         context.commit(MutationsType.SET_PROFILE, data.profile);
