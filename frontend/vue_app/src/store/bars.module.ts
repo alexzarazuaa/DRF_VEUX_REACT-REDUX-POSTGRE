@@ -34,7 +34,7 @@ const actions = {
     commit(MutationsType.FETCH_START);
     return BarsService.getBars()
       .then(({ data }: any) => {
-        // console.log(data)
+        console.log(data)
         commit(MutationsType.FETCH_END, data);
       })
       .catch((error: any) => {

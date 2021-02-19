@@ -1,33 +1,49 @@
 <template>
- <section>
-<form @submit.prevent="onSubmit">
- <h1>Sign Up</h1>
-  <div class="container">
+  <section>
+    <form @submit.prevent="onSubmit">
+      <h1>Sign Up</h1>
+      <div class="container">
+        <label for="username"><b>Username</b></label>
+        <input
+          class="form-control form-control-lg"
+          type="text"
+          v-model="username"
+          placeholder="Username"
+          required
+        />
 
-      <label for="username"><b>Username</b></label>
-      <input class="form-control form-control-lg" type="text" v-model="username" placeholder="Username" required />
+        <label for="email"><b>Email</b></label>
+        <input
+          class="form-control form-control-lg"
+          type="email"
+          v-model="email"
+          placeholder="Email"
+          required
+        />
 
-      <label for="email"><b>Email</b></label>
-      <input class="form-control form-control-lg" type="email" v-model="email" placeholder="Email" required />
-
-      <label for="psw"><b>Password</b></label>
-      <input class="form-control form-control-lg"  type="password" v-model="password" placeholder="password" required />
+        <label for="psw"><b>Password</b></label>
+        <input
+          class="form-control form-control-lg"
+          type="password"
+          v-model="password"
+          placeholder="password"
+          required
+        />
 
         <div class="clearfix">
-          <router-link :to="{ name: 'Home' }" > <button type="button" class="cancelbtn">Cancel</button></router-link>
+          <router-link :to="{ name: 'Home' }">
+            <button type="button" class="cancelbtn">Cancel</button></router-link
+          >
           <button class="signupbtn">Sign Up</button>
         </div>
-    
-  </div>
-</form>
- </section>
+      </div>
+    </form>
+  </section>
 </template>
 
-
-
 <script>
-  import { mapState } from "vuex";
-  import { ActionsType } from "@/store/actions.type";
+import { mapState } from "vuex";
+import { ActionsType } from "@/store/actions.type";
 
 export default {
   name: "Register",
@@ -35,13 +51,13 @@ export default {
     return {
       username: "",
       email: "",
-      password: ""
+      password: "",
     };
   },
   computed: {
     ...mapState({
-      errors: state => state.auth.errors
-    })
+      errors: (state) => state.auth.errors,
+    }),
   },
   methods: {
     onSubmit() {
@@ -49,26 +65,32 @@ export default {
         .dispatch(ActionsType.REGISTER, {
           email: this.email,
           password: this.password,
-          username: this.username
+          username: this.username,
         })
         .then((response) => {
-              console.log(response);
-              this.$router.push({ name: "Home"});
-            })
-            .catch((response) => {console.log(response.data)})
-        }
-  }
+          this.$router.push({ name: "Home" });
+        })
+        .catch((response) => {
+          response.data.errors.email
+            ? alert(response.data.errors.email)
+            : alert(response.data.errors.username);
+        });
+    },
+  },
 };
 </script>
 
-
-
 <style>
-body {font-family: Arial, Helvetica, sans-serif;}
-* {box-sizing: border-box;}
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+* {
+  box-sizing: border-box;
+}
 
 /* Full-width input fields */
-input[type=text], input[type=password] {
+input[type="text"],
+input[type="password"] {
   width: 100%;
   padding: 15px;
   margin: 5px 0 22px 0;
@@ -78,14 +100,15 @@ input[type=text], input[type=password] {
 }
 
 /* Add a background color when the inputs get focus */
-input[type=text]:focus, input[type=password]:focus {
+input[type="text"]:focus,
+input[type="password"]:focus {
   background-color: #ddd;
   outline: none;
 }
 
 /* Set a style for all buttons */
 button {
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -96,7 +119,7 @@ button {
 }
 
 button:hover {
-  opacity:1;
+  opacity: 1;
 }
 
 /* Extra styles for the cancel button */
@@ -106,7 +129,8 @@ button:hover {
 }
 
 /* Float cancel and signup buttons and add an equal width */
-.cancelbtn, .signupbtn {
+.cancelbtn,
+.signupbtn {
   float: left;
   width: 50%;
 }
@@ -143,7 +167,7 @@ hr {
   border: 1px solid #f1f1f1;
   margin-bottom: 25px;
 }
- 
+
 /* The Close Button (x) */
 .close {
   position: absolute;
@@ -169,9 +193,9 @@ hr {
 
 /* Change styles for cancel button and signup button on extra small screens */
 @media screen and (max-width: 300px) {
-  .cancelbtn, .signupbtn {
-     width: 100%;
+  .cancelbtn,
+  .signupbtn {
+    width: 100%;
   }
 }
-
 </style>

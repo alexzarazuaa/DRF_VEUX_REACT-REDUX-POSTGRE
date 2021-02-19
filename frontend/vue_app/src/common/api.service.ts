@@ -72,7 +72,7 @@ export const BarsService = {
   },
 
   getBars() { //GET ALLS
-    return ApiService.get(`${API_URL}/bars`);
+    return ApiService.get(`${API_URL}/bars/?limit=2&offset=0`);
   },
 
   getBar(slug: string) {  //GET ONE BAR 
