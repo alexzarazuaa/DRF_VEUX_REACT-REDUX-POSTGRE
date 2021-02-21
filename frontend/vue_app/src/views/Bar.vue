@@ -12,7 +12,7 @@
     </article>
 
     <article class="bar-buttons">
-      <button  class="btn-primary" v-if="bar.favorited" @click="toggleFavorite">
+      <button class="btn-primary" v-if="bar.favorited" @click="toggleFavorite">
         <i class="ion-heart"></i>&nbsp; &nbsp; &nbsp;
         <span class="counter"> {{ bar.favoritesCount }} </span>
       </button>
@@ -31,7 +31,9 @@
 
     <article class="bar-owner">
       <h3>Owner</h3>
-      <p>{{ bar.owner.username }}</p>
+      <a class="ownerBar" @click="profile(currentUser.username)">
+        {{ currentUser.username }}
+      </a>
     </article>
   </section>
 </template>
@@ -55,15 +57,9 @@ export default {
       }
     );
   },
-  // beforeUpdate() {
-  //   console.log("beforeUpdate");
-  //   return {
-  //     "btn-primary": this.bar.favorited,
-  //     "btn-outline-primary": !this.bar.favorited,
-  //   };
-  // },
+
   computed: {
-    ...mapGetters(["bar", "isAuthenticated"]),
+    ...mapGetters(["bar", "currentUser", "isAuthenticated"]),
   },
   methods: {
     toggleFavorite() {
@@ -71,13 +67,9 @@ export default {
         this.$router.push({ name: "Login" });
         return;
       }
-      console.log(this.bar);
       const action = this.bar.favorited
         ? ActionsType.FAVORITE_REMOVE
         : ActionsType.FAVORITE_ADD;
-
-      //   (ActionsType.FAVORITE_REMOVE, "btn-outline-primary")
-      // : (ActionsType.FAVORITE_REMOVE, "btn-primary");
       this.$store.dispatch(action, this.bar.slug);
     },
     Reserva() {
@@ -85,6 +77,9 @@ export default {
         this.$router.push({ name: "Login" });
         return;
       }
+    },
+    profile(username) {
+      this.$router.push({ name: "Profile", params: { username: username } });
     },
   },
   watch: {
@@ -123,7 +118,22 @@ export default {
   width: 50%;
   text-align: center;
 }
+.ownerBar {
+  color: black;
+  text-align: center;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px;
+  line-height: 25px;
+  border-radius: 2px;
+  font-weight: bold;
 
+}
+
+.ownerBar:hover {
+  cursor: pointer;
+  text-decoration: underline grey;
+}
 .buttons {
   width: 10%;
 }
@@ -149,7 +159,7 @@ export default {
   align-items: center;
   align-content: center;
   font-size: 32px;
-  font-width: bold;
+  font-weight: bold;
   font-family: "Lucida Console", "Courier New", monospace;
 }
 .bar-price {
@@ -164,7 +174,7 @@ export default {
   align-items: center;
   align-content: center;
   font-size: 22px;
-  font-width: bold;
+  font-weight: bold;
 }
 
 .bar-description,

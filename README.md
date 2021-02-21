@@ -21,7 +21,7 @@
 
 * You have the instructions in this files.
 
-* BACKEND /INSTALLDJANGO.txt
+* BACKEND /helps 
 * FRONTEND / INSTALLVUE.txt
 
 * But you also can do this : 
