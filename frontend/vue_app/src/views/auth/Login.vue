@@ -1,82 +1,90 @@
 <template>
- <section>
+  <section>
+    <div class="container">
+      <form @submit.prevent="onSubmit(email, password)">
+        <div class="row">
+          <h2 style="text-align:center">Login with Social Media or Manually</h2>
+          <div class="vl">
+            <span class="vl-innertext">or</span>
+          </div>
 
-<div class="container">
-  <form  @submit.prevent="onSubmit(email, password)">
-    <div class="row">
-      <h2 style="text-align:center">Login with Social Media or Manually</h2>
-      <div class="vl">
-        <span class="vl-innertext">or</span>
-      </div>
+          <div class="col">
+            <a href="#" class="fb btn">
+              <i class="fa fa-facebook fa-fw"></i> Login with Facebook
+            </a>
+            <a href="#" class="twitter btn">
+              <i class="fa fa-twitter fa-fw"></i> Login with Twitter
+            </a>
+            <a href="#" class="google btn"
+              ><i class="fa fa-google fa-fw"> </i> Login with Google+
+            </a>
+          </div>
 
-      <div class="col">
-        <a href="#" class="fb btn">
-          <i class="fa fa-facebook fa-fw"></i> Login with Facebook
-         </a>
-        <a href="#" class="twitter btn">
-          <i class="fa fa-twitter fa-fw"></i> Login with Twitter
-        </a>
-        <a href="#" class="google btn"><i class="fa fa-google fa-fw">
-          </i> Login with Google+
-        </a>
-      </div>
+          <div class="col">
+            <div class="hide-md-lg">
+              <p>Or sign in manually:</p>
+            </div>
 
-      <div class="col">
-        <div class="hide-md-lg">
-          <p>Or sign in manually:</p>
+            <input
+              class="form-control form-control-lg"
+              type="email"
+              v-model="email"
+              placeholder="Email"
+              required
+            />
+            <input
+              class="form-control form-control-lg"
+              type="password"
+              v-model="password"
+              placeholder="password"
+              required
+            />
+            <button class="signupbtn">Sign In</button>
+          </div>
         </div>
+      </form>
+    </div>
 
-        <input class="form-control form-control-lg" type="email" v-model="email" placeholder="Email" required />
-        <input class="form-control form-control-lg"  type="password" v-model="password" placeholder="password" required />
-        <button  class="signupbtn">Sign In</button>
+    <div class="bottom-container">
+      <div class="row">
+        <div class="col">
+          <router-link :to="{ name: 'Register' }">
+            <a style="color:white" class="btn">Register</a>
+          </router-link>
+        </div>
+        <div class="col">
+          <a href="#" style="color:white" class="btn">Forgot password?</a>
+        </div>
       </div>
-      
     </div>
-  </form>
-</div>
-
-<div class="bottom-container">
-  <div class="row">
-    <div class="col">
-      <router-link :to="{ name: 'Register' }" > <a style="color:white" class="btn">Register</a> </router-link>
-    </div>
-    <div class="col">
-      <a href="#" style="color:white" class="btn">Forgot password?</a>
-    </div>
-  </div>
-</div>
- </section>
+  </section>
 </template>
-
-
 
 <script>
 import { mapState } from "vuex";
 import { ActionsType } from "@/store/actions.type";
 export default {
-    name: "Login",
-    data() {
-      return {
-        email: null,
-        password: null
-      };
+  name: "Login",
+  data() {
+    return {
+      email: null,
+      password: null,
+    };
+  },
+  methods: {
+    onSubmit(email, password) {
+      this.$store
+        .dispatch(ActionsType.LOGIN, { email, password })
+        .then(() => this.$router.push({ name: "Home" }));
     },
-    methods: {
-      onSubmit(email, password) {
-        this.$store
-          .dispatch(ActionsType.LOGIN, { email, password })
-          .then(() => this.$router.push({ name: "Home" }));
-      }
-    },
-    computed: {
-      ...mapState({
-        errors: state => state.auth.errors
-      })
-    }
+  },
+  computed: {
+    ...mapState({
+      errors: (state) => state.auth.errors,
+    }),
+  },
 };
 </script>
-
-
 
 <style>
 body {
@@ -88,7 +96,6 @@ body {
 }
 
 /* style the container */
-
 
 /* style inputs and link buttons */
 input,
@@ -112,12 +119,12 @@ input:hover,
 
 /* add appropriate colors to fb, twitter and google buttons */
 .fb {
-  background-color: #3B5998;
+  background-color: #3b5998;
   color: white;
 }
 
 .twitter {
-  background-color: #55ACEE;
+  background-color: #55acee;
   color: white;
 }
 
@@ -127,13 +134,13 @@ input:hover,
 }
 
 /* style the submit button */
-input[type=submit] {
-  background-color: #4CAF50;
+input[type="submit"] {
+  background-color: #4caf50;
   color: white;
   cursor: pointer;
 }
 
-input[type=submit]:hover {
+input[type="submit"]:hover {
   background-color: #45a049;
 }
 
@@ -201,5 +208,4 @@ input[type=submit]:hover {
     text-align: center;
   }
 }
-
 </style>

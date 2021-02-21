@@ -11,30 +11,27 @@ export const InitialState: State = {
 };
 
 export const actions = {
+
   async [ActionsType.FETCH_BAR](context: any, barSlug: any) {
-    // avoid extronuous network call if article exists
     const { data } = await BarsService.getBar(barSlug);
     context.commit(MutationsType.SET_BAR, data);
     return data;
   },
   async [ActionsType.FAVORITE_ADD](context: any, barSlug: any) {
-    console.log("lo hara favorito");
+    //console.log("lo hara favorito");
     const { data } = await BarsService.addBarFavorite(barSlug);
-    console.log(data);
-    //context.commit(MutationsType.UPDATE_BAR_IN_LIST, data, { root: true });
+    //console.log(data);
     context.commit(MutationsType.SET_BAR, data.bar);
   },
   async [ActionsType.FAVORITE_REMOVE](context: any, barSlug: any) {
-    console.log("entra borra fav");
+    //console.log("entra borra fav");
     const { data } = await BarsService.removeBarFavorite(barSlug);
-    console.log(data);
-    //context.commit(MutationsType.UPDATE_BAR_IN_LIST, data, { root: true });
-    // Update list as well. This allows us to favorite an article in the Home view.
+    //console.log(data);
     context.commit(MutationsType.SET_BAR, data.bar);
   },
+
 };
 
-/* eslint no-param-reassign: ["error", { "props": false }] */
 export const mutations = {
   [MutationsType.SET_BAR](state: State, bar: any) {
     state.Bar = bar;

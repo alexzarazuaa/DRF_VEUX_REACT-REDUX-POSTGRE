@@ -1,4 +1,4 @@
-import ApiService from "@/common/api.service";
+import ApiService, { ProfileService } from "@/common/api.service";
 import { ActionsType } from "./actions.type";
 import { MutationsType } from "./mutations.type";
 
@@ -15,15 +15,14 @@ const getters = {
 
 const actions = {
   [ActionsType.FETCH_PROFILE](context: any , username: any) {
-    return ApiService.getProfile("profiles/", username)
+    return ProfileService.getProfile("profiles/", username)
       .then(({ data }) => {
         // console.log(data)
         context.commit(MutationsType.SET_PROFILE, data.profile);
         return data;
       })
-      .catch(() => {
-        // #todo SET_ERROR cannot work in multiple states
-        // context.commit(SET_ERROR, response.data.errors)
+      .catch((response) => {
+        //  context.commit(MutationsType.SET_ERROR, response.data.errors)
       });
   },
 };

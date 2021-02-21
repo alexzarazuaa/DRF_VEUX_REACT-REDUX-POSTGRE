@@ -6,11 +6,10 @@
       </div>
     </div>
 
-    <!-- <article>
-      <a href="#" class="previous round">&#8249;</a>
-      <a href="#" class="next round">&#8250;</a>
-    </article> -->
-    
+    <article>
+      <a @click="previous" class="previous round">&#8249;</a>
+      <a @click="next" class="next round">&#8250;</a>
+    </article>
   </section>
 </template>
 
@@ -27,7 +26,19 @@ export default {
     this.$store.dispatch(ActionsType.FETCH_BARS);
   },
   computed: {
-    ...mapGetters(["bars"]),
+    ...mapGetters(["bars", "next", "previous"]),
+  },
+  methods: {
+    next() {
+      console.log("dfrf next");
+
+      this.$store.dispatch(ActionsType.FETCH_PAGINATION, this.next);
+    },
+    previous() {
+      console.log("dfrf PRE");
+
+      this.$store.dispatch(ActionsType.FETCH_PAGINATION, this.previous);
+    },
   },
 
   watch: {
@@ -49,6 +60,18 @@ export default {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
 }
-
-
+.previous {
+  display: flex;
+  justify-content: flex-start;
+  font-size: 35px;
+  font-weight: bold;
+  margin-left: 85px;
+}
+.next {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 35px;
+  font-weight: bold;
+  margin-right: 85px;
+}
 </style>
