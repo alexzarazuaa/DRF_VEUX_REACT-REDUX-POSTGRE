@@ -7,9 +7,12 @@ class ProfileSerializer(serializers.ModelSerializer):
     username = serializers.CharField(source='user.username')
     bio = serializers.CharField(allow_blank=True, required=False)
     image = serializers.CharField(allow_blank=True, required=False)
+<<<<<<< HEAD
     favorited = serializers.SerializerMethodField()
 
     # image = serializers.SerializerMethodField()
+=======
+>>>>>>> e43a151cec4c4daebbe5b949990658ff3ad0623d
     class Meta:
         model = Profile
         fields = ('username', 'bio', 'image', 'favorited',)
