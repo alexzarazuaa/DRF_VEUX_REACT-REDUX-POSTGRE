@@ -48,18 +48,16 @@ export const UserService = {
       throw new Error(`[RWV] ApiService ${error}`);
     });
   },
-}
+};
 
 export const ProfileService = {
-  
   getProfile(resource: string, params: any) {
     //console.log("entra profile", resource);
     return axios.get(`${API_URL}/${resource}${params}`).catch((error) => {
       throw new Error(`[RWV] ApiService ${error}`);
     });
   },
-
-}
+};
 
 export const PaginationSerice = {
   getPag(resource: string, params: any) {
@@ -68,7 +66,7 @@ export const PaginationSerice = {
       throw new Error(`[RWV] ApiService ${error}`);
     });
   },
-}
+};
 
 export const BarsService = {
   getBars() {
@@ -80,6 +78,20 @@ export const BarsService = {
     //GET ONE BAR
     return ApiService.get(`${API_URL}/bars/${slug}`);
   },
+
+  //BOOK
+
+  postBook(slug: string) {
+    // console.log("entra", resource);
+    return ApiService.post(`bars/${slug}/book`, "");
+  },
+
+  //BOOK
+  deleteBook(slug: string) {
+    // console.log("entra", resource);
+    return ApiService.delete(`bars/${slug}/book`);
+  },
+
 
   addBarFavorite(slug: string) {
     //FAVORITE BAR

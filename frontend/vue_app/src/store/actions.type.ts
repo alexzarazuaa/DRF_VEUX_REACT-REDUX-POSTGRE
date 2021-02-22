@@ -8,6 +8,8 @@ export enum ActionsType {
     FETCH_BAR = "fetchBar",
     FETCH_BARS = "fetchBars",
     FETCH_PAGINATION = "fetchPagination",
+    BOOK_ADD="bookAdd",
+    BOOK_REMOVE ="bookRemove",
     FETCH_PROFILE = "fetchProfile",
     FETCH_PROFILE_FOLLOW = "fetchProfileFollow",
     FETCH_PROFILE_UNFOLLOW = "fetchProfileUnfollow",

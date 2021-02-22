@@ -1,5 +1,6 @@
 import { BarsService } from "@/common/api.service";
 import { ActionsType } from "./actions.type";
+import barsModule from "./bars.module";
 import { MutationsType } from "./mutations.type";
 
 export interface State {
@@ -29,6 +30,21 @@ export const actions = {
     //console.log(data);
     context.commit(MutationsType.SET_BAR, data.bar);
   },
+
+
+  async [ActionsType.BOOK_ADD](context: any, barSlug: any) {
+    console.log("RESERVA",barSlug);
+    const { data } = await BarsService.postBook(barSlug);
+    // console.log(data);
+    context.commit(MutationsType.SET_BAR, data.bar);
+  },
+  async [ActionsType.BOOK_REMOVE](context: any, barSlug: any) {
+    console.log(" borra RESERVA" , barSlug);
+    const { data } = await BarsService.deleteBook(barSlug);
+    //console.log(data);
+    context.commit(MutationsType.SET_BAR, data.bar);
+  },
+
 
 };
 
