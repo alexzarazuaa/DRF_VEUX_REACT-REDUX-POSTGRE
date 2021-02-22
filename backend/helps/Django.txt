@@ -1,0 +1,60 @@
++++++++++++++++++++++++++  Create project  +++++++++++++++++++++++++++++
+
+sudo docker-compose run web django-admin startproject config .
+sudo chmod -R 777 .
+sudo docker-compose up
+
+https://docs.docker.com/compose/django/
+
+-------------------------  End Create project  -------------------------
+
+
+
+
++++++++++++++++++++++++++  Start Project  ++++++++++++++++++++++++++++++
+
+sudo docker-compose up
+
+-------------------------  End Start Project   -------------------------
+
+
+
+
++++++++++++++++++++++++++  Create app  +++++++++++++++++++++++++++++++++
+
+sudo docker exec -it backend_web_1 sh
+python3 manage.py startapp profiles
+sudo chmod -R 777 .
+
+-------------------------  End Create app  -----------------------------
+
+
+
+
++++++++++++++++++++++++++ Create Migrations  +++++++++++++++++++++++++++
+
+sudo docker exec -it backend_web_1 sh
+python3 manage.py makemigrations
+python3 manage.py migrate
+
+------------------------- End Create Migrations ------------------------
+
+
+
+
++++++++++++++++++++++++++ Create Superuser +++++++++++++++++++++++++++++
+
+python3 manage.py createsuperuser
+
+------------------------- End Create Superuser -------------------------
+
+
+
+
++++++++++++++++++++++++++++ PORTS ++++++++++++++++++++++++++++++++++++++
+
+http://localhost:8001/
+
+--------------------------- PORTS --------------------------------------
+
+
