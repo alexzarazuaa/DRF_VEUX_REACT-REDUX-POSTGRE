@@ -105,11 +105,9 @@ class BarsBookViewSet(mixins.CreateModelMixin,
                      mixins.RetrieveModelMixin,
                      viewsets.GenericViewSet):
                      
-    # lookup_field = 'slug'
     queryset = Bar.objects.select_related('author', 'author__user')
     renderer_classes = (BarJSONRenderer,)
     serializer_class = BarSerializer
-    permission_classes = [IsAuthenticated]
 
     def get_permissions(self):
 
@@ -148,7 +146,7 @@ class BarsBookViewSet(mixins.CreateModelMixin,
  
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-    def delete(self, request, bar_slug=None):
+    def delete(self, request, bar_slug):
 
         try:
             bar = Bar.objects.get(slug=bar_slug)
@@ -162,17 +160,16 @@ class BarsBookViewSet(mixins.CreateModelMixin,
 
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-    def update(self, request, slug):
+    def update(self, request, bar_slug):
 
         try:
-            serializer_instance = self.queryset.get(slug=slug)
-        except Article.DoesNotExist:
-            raise NotFound('An article with this slug does not exist.')
-            
-        serializer_data = request.data.get('time')
-
-
-
+            bar = Bar.objects.get(slug=bar_slug)
+        except Bar.DoesNotExist:
+            raise NotFound('An bar with this slug was not found.')
+                    
+        profile = self.request.user.profile
+        time = request.data.get('time')
+        profile.modbook(bar, time)
 
         serializer = self.serializer_class(bar, context={'request': request})
 

@@ -18,7 +18,7 @@ BookBar = BarsBookViewSet.as_view({
     'post': 'create',
     'get': 'retrieve',
     'delete': 'delete',
-
+    'put': 'update'
 })
 
 urlpatterns = [

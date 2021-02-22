@@ -32,17 +32,24 @@ class Profile(TimestampedModel):
         return self.favorites.filter(pk=bar.pk).exists()
 
     def book(self, bar, time):
-        self.reference_booking.add(bar, through_defaults={'time':time})
+        try:
+            self.reference_booking.add(bar, through_defaults={'time':time})
+        except Exception as e:
+            print(e)
     
     def unbook(self, bar):
         self.reference_booking.remove(bar)
         
-    def modbook(self, bar):
-        self.reference_booking.remove(bar)
+    def modbook(self, bar, time):
+
+        self.reference_booking.set([bar], through_defaults={'time':time})
         
 
 
 class Booking(models.Model):
+    class Meta:
+            unique_together=(('person','bar','time'),)
+
     person = models.ForeignKey(Profile, on_delete=models.CASCADE)
     bar = models.ForeignKey('bars.Bar', on_delete=models.CASCADE)
     time = models.TextField(blank=True)
