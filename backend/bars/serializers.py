@@ -62,7 +62,6 @@ class BarSerializer(serializers.ModelSerializer):
         if request is None:
             return False
 
-        # if not request.user.is_authenticated():
         if not request.user.is_authenticated:
             return False
 
