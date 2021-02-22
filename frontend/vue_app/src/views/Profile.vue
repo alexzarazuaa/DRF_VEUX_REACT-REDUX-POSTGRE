@@ -1,105 +1,69 @@
 <template>
-  <div class="profile-page">
-    <div class="user-info">
-      <div class="container">
-        <div class="row">
-          <div class="col-xs-12 col-md-10 offset-md-1">
-            <h4>{{ profile.username }}</h4>
-            <div v-if="isCurrentUser()">
-              <router-link
-                class="btn btn-sm btn-outline-secondary action-btn"
-                :to="{ name: 'settings' }"
-              >
-                <i class="ion-gear-a"></i> Edit Profile Settings
-              </router-link>
-            </div>
-            <div v-else>
-              <button
-                class="btn btn-sm btn-secondary action-btn"
-                v-if="profile.following"
-                @click.prevent="unfollow()"
-              >
-                <i class="ion-plus-round"></i> &nbsp;Unfollow
-                {{ profile.username }}
-              </button>
-              <button
-                class="btn btn-sm btn-outline-secondary action-btn"
-                v-if="!profile.following"
-                @click.prevent="follow()"
-              >
-                <i class="ion-plus-round"></i> &nbsp;Follow
-                {{ profile.username }}
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+  <section>
+    <article class="userInfo">
+      <img class="ImgProfile" v-bind:src="profile.image" />
+      <h1 class="userInfo_Name">{{ profile.username }}</h1>
+    </article>
 
-    <div class="container">
-      <div class="row">
-        <div class="col-xs-12 col-md-10 offset-md-1">
-          <div class="articles-toggle">
-            <ul class="nav nav-pills outline-active">
-              <li class="nav-item">
-                <router-link
-                  class="nav-link"
-                  active-class="active"
-                  exact
-                  :to="{ name: 'profile' }"
-                >
-                  My Articles
-                </router-link>
-              </li>
-              <li class="nav-item">
-                <router-link
-                  class="nav-link"
-                  active-class="active"
-                  exact
-                  :to="{ name: 'profile-favorites' }"
-                >
-                  Favorited Articles
-                </router-link>
-              </li>
-            </ul>
-          </div>
-          <router-view></router-view>
-        </div>
-      </div>
-    </div>
-  </div>
+    <!-- <h2 class="titleFavoriteds">YOUR FAVORITEDS</h2> -->
+    <!-- <BarsList :favorited="favorited" /> -->
+  </section>
 </template>
 
 <script>
+import store from "@/store";
 import { mapGetters } from "vuex";
+//import BarsList from '@/components/BarsListComponent/BarsList'
 import { ActionsType } from "@/store/actions.type";
 
 export default {
   name: "Profile",
+  // components:{BarsList},
   mounted() {
     this.$store.dispatch(ActionsType.FETCH_PROFILE, this.$route.params);
   },
-  computed: {
-    ...mapGetters(["currentUser", "profile", "isAuthenticated"]),
+  beforeRouteEnter(to, from, next) {
+    store.dispatch(ActionsType.FETCH_PROFILE, to.params.username);
+    next();
   },
-  methods: {
-    isCurrentUser() {
-      if (this.currentUser.username && this.profile.username) {
-        return this.currentUser.username === this.profile.username;
-      }
-      return false;
-    },
+  computed: {
+    ...mapGetters(["profile"]),
   },
   watch: {
-    $route(to) {
-      this.$store.dispatch(ActionsType.FETCH_PROFILE, this.$route.params);
-    },
     profile: {
       deep: true,
       handler(value) {
-        console.log("watch currentUser", value);
+        console.log("watch profile", value);
       },
     },
   },
 };
 </script>
+
+<style scoped>
+.userInfo {
+  padding-top: 74.3px;
+  padding-bottom: 71px;
+  border-bottom: lightcoral 2px solid;
+  text-align: center;
+  background-color: palegoldenrod;
+}
+.userInfo_Name {
+  color: black;
+  text-align: center;
+  padding: 12px;
+  text-decoration: peru;
+  line-height: 10px;
+  border-radius: 4px;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.ImgProfile {
+  margin-top: 15px;
+  border-radius: 30px;
+}
+.titleFavoriteds:hover {
+  text-decoration: underline grey;
+}
+</style>

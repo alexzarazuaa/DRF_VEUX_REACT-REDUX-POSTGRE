@@ -4,28 +4,20 @@
   </div>
 </template>
 
-
-<script >
+<script>
 export default {
-    name: "BarsPreview",
-    component: {},
-    props:[
-         'bar'
-    ],
-     methods: {
-      details(slug) {
-        this.$router.push({ name: "Bar", params: {slug: slug}});
-      }
-    }
-   
-  
-  
-}
+  name: "BarsPreview",
+  component: {},
+  props: ["bar"],
+  methods: {
+    details(slug) {
+      this.$router.push({ name: "Bar", params: { slug: slug } });
+    },
+  },
+};
 </script>
 
-
 <style>
-
 .bar-preview {
   cursor: pointer;
   color: black;
@@ -38,12 +30,12 @@ export default {
 }
 .bar-preview:hover {
   transition: 0.4s;
-    background-color: grey;
+  background-color: grey;
 }
 .bar-title {
   color: #ef5555;
   font-size: 32px;
-  font-weight:bold;
+  font-weight: bold;
 }
 .bar-title {
   transition: 0.4s;
@@ -52,5 +44,4 @@ export default {
   font-size: 1.2em;
   margin-bottom: 5px;
 }
-
 </style>

@@ -1,4 +1,4 @@
-import ApiService from "@/common/api.service";
+import ApiService, { ProfileService } from "@/common/api.service";
 import { ActionsType } from "./actions.type";
 import { MutationsType } from "./mutations.type";
 
@@ -14,46 +14,17 @@ const getters = {
 };
 
 const actions = {
-  [ActionsType.FETCH_PROFILE](context: any  , username: string) {
-    return ApiService.get("profiles", username)
+  [ActionsType.FETCH_PROFILE](context: any , username: any) {
+    return ProfileService.getProfile("profiles/", username)
       .then(({ data }) => {
-        console.log('entra ',data)
-        context.commit(MutationsType.SET_PROFILE, data);
-        console.log(data)
+        // console.log(data)
+        context.commit(MutationsType.SET_PROFILE, data.profile);
         return data;
       })
       .catch((response) => {
-        console.log(response)
-        // #todo SET_ERROR cannot work in multiple states
-        //context.commit(MutationsType.SET_ERROR, response.data.errors)
+        //  context.commit(MutationsType.SET_ERROR, response.data.errors)
       });
-  }
-  
-//   ,
-//   [ActionsType.FETCH_PROFILE_FOLLOW](context : any, payload : any) {
-//     const { username } = payload;
-//     return ApiService.post(`profiles/${username}/follow`)
-//       .then(({ data }) => {
-//         context.commit(MutationsType.SET_PROFILE, data.profile);
-//         return data;
-//       })
-//       .catch((response) => {
-//         // #todo SET_ERROR cannot work in multiple states
-//         context.commit(MutationsType.SET_ERROR, response.data.errors)
-//       });
-//   },
-//   [ActionsType.FETCH_PROFILE_UNFOLLOW](context : any , payload :  any) {
-//     const { username } = payload;
-//     return ApiService.delete(`profiles/${username}/follow`)
-//       .then(({ data }) => {
-//         context.commit(MutationsType.SET_PROFILE, data.profile);
-//         return data;
-//       })
-//       .catch((response) => {
-//         // #todo SET_ERROR cannot work in multiple states
-//         context.commit(MutationsType.SET_ERROR, response.data.errors)
-//       });;
-//   }
+  },
 };
 
 const mutations = {

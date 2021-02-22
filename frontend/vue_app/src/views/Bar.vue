@@ -12,15 +12,14 @@
     </article>
 
     <article class="bar-buttons">
-      <button
-        @click="toggleFavorite"
-        :class="{
-        'btn-primary': bar.favorited,
-        'btn-outline-primary': !bar.favorited
-      }"
-      >
-      <i class="ion-heart"></i>
-      <span class="counter"> {{ bar.favoritesCount }} </span>
+      <button class="btn-primary" v-if="bar.favorited" @click="toggleFavorite">
+        <i class="ion-heart"></i>&nbsp; &nbsp; &nbsp;
+        <span class="counter"> {{ bar.favoritesCount }} </span>
+      </button>
+
+      <button class="btn-outline-primary" v-else @click="toggleFavorite">
+        <i class="ion-heart"></i>&nbsp; &nbsp; &nbsp;
+        <span class="counter"> {{ bar.favoritesCount }} </span>
       </button>
     </article>
 
@@ -30,10 +29,11 @@
       </button>
     </article>
 
-    
     <article class="bar-owner">
       <h3>Owner</h3>
-      <p>{{ bar.owner.username }}</p>
+      <a class="ownerBar" @click="profile(currentUser.username)">
+        {{ currentUser.username }}
+      </a>
     </article>
   </section>
 </template>
@@ -57,14 +57,9 @@ export default {
       }
     );
   },
+
   computed: {
-    ...mapGetters(["bar", "isAuthenticated"]),
-    toggleFavoriteButtonClasses() {
-      return {
-        "btn-primary": this.bar.favorited,
-        "btn-outline-primary": !this.bar.favorited,
-      };
-    },
+    ...mapGetters(["bar", "currentUser", "isAuthenticated"]),
   },
   methods: {
     toggleFavorite() {
@@ -72,7 +67,6 @@ export default {
         this.$router.push({ name: "Login" });
         return;
       }
-      console.log(this.bar)
       const action = this.bar.favorited
         ? ActionsType.FAVORITE_REMOVE
         : ActionsType.FAVORITE_ADD;
@@ -84,6 +78,9 @@ export default {
         return;
       }
     },
+    profile(username) {
+      this.$router.push({ name: "Profile", params: { username: username } });
+    },
   },
   watch: {
     bar: {
@@ -92,7 +89,7 @@ export default {
         console.log("watch a bar", value);
       },
     },
- },
+  },
 };
 </script>
 
@@ -121,18 +118,38 @@ export default {
   width: 50%;
   text-align: center;
 }
+.ownerBar {
+  color: black;
+  text-align: center;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px;
+  line-height: 25px;
+  border-radius: 2px;
+  font-weight: bold;
 
+}
+
+.ownerBar:hover {
+  cursor: pointer;
+  text-decoration: underline grey;
+}
 .buttons {
   width: 10%;
 }
-.btn-primary{
-   background-color: coral;
-    color: red;
+.btn-primary {
+  background-color: coral;
+  color: red;
 }
 
-.btn-outline-primary{
+.btn-outline-primary {
   background-color: green;
-    color: whitesmokeΰ;
+  color: whitesmokeΰ;
+}
+.counter,
+.ion-heart {
+  font-size: 25px;
+  font-weight: bold;
 }
 .bar-title {
   text-transform: capitalize;
@@ -142,7 +159,7 @@ export default {
   align-items: center;
   align-content: center;
   font-size: 32px;
-  font-width: bold;
+  font-weight: bold;
   font-family: "Lucida Console", "Courier New", monospace;
 }
 .bar-price {
@@ -157,7 +174,7 @@ export default {
   align-items: center;
   align-content: center;
   font-size: 22px;
-  font-width: bold;
+  font-weight: bold;
 }
 
 .bar-description,

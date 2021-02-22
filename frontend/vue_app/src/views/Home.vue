@@ -1,45 +1,29 @@
 <template>
-<section>
+  <section>
     <div class="banner">
-    <div class="container">
-      <h1 class="logo-font"> SEEK BAR</h1>
-      <p> MAKE YOUR RESERVATION IN THE BEST BARS</p>
-
-    
-    </div>
-
-  </div>
-    <div class="list">
-
-        <BarsList />
+      <div class="container">
+        <h1 class="logo-font">SEEK BAR</h1>
+        <p>MAKE YOUR RESERVATION IN THE BEST BARS</p>
       </div>
-</section>
-
-
-    
-
+    </div>
+    <div class="list">
+      <BarsList />
+    </div>
+  </section>
 </template>
 
-
-
 <script>
- import BarsList from '@/components/BarsListComponent/BarsList'
-  export default {
-    name: "Home",
-    components: {
-      BarsList
-    },
-  }
-  
+import BarsList from "@/components/BarsListComponent/BarsList";
+export default {
+  name: "Home",
+  components: {
+    BarsList,
+  },
+};
 </script>
 
-
-
-
 <style>
-
-
-.container{
+.container {
   display: inline-block;
   color: white;
   text-align: center;
@@ -47,11 +31,12 @@
   text-decoration: none;
 }
 
-.banner{
+.banner {
   background-color: black;
 }
 
-.logo,.logo-font {
+.logo,
+.logo-font {
   text-align: center;
   padding: 12px;
   text-decoration: none;
@@ -62,15 +47,12 @@
   font-weight: bold;
 }
 
-.list{
+.list {
   padding: 10px;
   width: 100vw;
   box-sizing: border-box;
   padding: 50px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-
 }
-
-
 </style>

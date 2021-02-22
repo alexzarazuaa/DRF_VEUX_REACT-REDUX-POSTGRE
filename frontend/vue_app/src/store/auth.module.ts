@@ -1,4 +1,4 @@
-import ApiService from "@/common/api.service";
+import ApiService, { UserService } from "@/common/api.service";
 import JwtService from "@/common/jwt.service";
 import {
   ActionsType
@@ -64,7 +64,7 @@ const actions = {
   [ActionsType.CHECK_AUTH](context: any) {
     if (JwtService.getToken()) {
       ApiService.setHeader();
-      ApiService.getUser("user")
+      UserService.getUser("user")
         .then(({ data }) => {
           // console.log(data,'USER')
           context.commit(MutationsType.SET_AUTH, data.user);

@@ -7,6 +7,7 @@ export enum ActionsType {
     FAVORITE_REMOVE = "removeFavorite",
     FETCH_BAR = "fetchBar",
     FETCH_BARS = "fetchBars",
+    FETCH_PAGINATION = "fetchPagination",
     FETCH_PROFILE = "fetchProfile",
     FETCH_PROFILE_FOLLOW = "fetchProfileFollow",
     FETCH_PROFILE_UNFOLLOW = "fetchProfileUnfollow",

@@ -21,7 +21,7 @@
 
 * You have the instructions in this files.
 
-* BACKEND /INSTALLDJANGO.txt
+* BACKEND /helps 
 * FRONTEND / INSTALLVUE.txt
 
 * But you also can do this : 
@@ -44,7 +44,7 @@ In addition to that, you can place orders to be taken wherever you want.
 
 | Page | Features |
 | - | - |
-| Home |  |
+| Home |  Header and Bars List |
 | Bares | List using Django Rest FrameWork and PostGre, Details using Django Rest FrameWork and PostGre |
 | Bar | Product Info , and Favorite button and Reserve Button |
 | Profile | User info, favourited Bars |
@@ -56,6 +56,8 @@ In addition to that, you can place orders to be taken wherever you want.
 | Register | Regular register  |
 | Login | Regular login with Django and PostGre |
 | Favourites | Favourite button in each bar , favourited show up on profile  |
+| Bookings | Make your reservation at your favorite bar |
+
 
 
 <br>
