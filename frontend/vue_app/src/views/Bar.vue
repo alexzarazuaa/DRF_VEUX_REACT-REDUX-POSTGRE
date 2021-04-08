@@ -24,8 +24,14 @@
     </article>
 
     <article class="bar-buttons">
-      <button @click="Reserva" style="font-size:24px">
-        <span>RESERVAR</span>
+      <button @click="Reserva" v-if="!bar.book" style="font-size:24px">
+        <span>RESERVAR</span>&nbsp; &nbsp; &nbsp;
+        <span class="counter"> {{ bar.bookingsCount }} </span>
+      
+      </button>
+      <button @click="Reserva" v-else style="font-size:24px">
+        <span>ANULAR RESERVA</span>&nbsp; &nbsp; &nbsp;
+        <span class="counter"> {{ bar.bookingsCount }} </span>
       </button>
     </article>
 
@@ -52,8 +58,9 @@ export default {
   },
   beforeRouteEnter(to, from, next) {
     Promise.all([store.dispatch(ActionsType.FETCH_BAR, to.params.slug)]).then(
-      () => {
+      (data) => {
         next();
+        console.log(data);
       }
     );
   },
@@ -72,11 +79,16 @@ export default {
         : ActionsType.FAVORITE_ADD;
       this.$store.dispatch(action, this.bar.slug);
     },
+
     Reserva() {
       if (!this.isAuthenticated) {
         this.$router.push({ name: "Login" });
         return;
       }
+      const action = this.bar.book
+        ? ActionsType.BOOK_REMOVE
+        : ActionsType.BOOK_ADD;
+      this.$store.dispatch(action, this.bar.slug);
     },
     profile(username) {
       this.$router.push({ name: "Profile", params: { username: username } });
@@ -127,7 +139,15 @@ export default {
   line-height: 25px;
   border-radius: 2px;
   font-weight: bold;
+}
+label {
+  display: block;
+  font: 1rem "Fira Sans", sans-serif;
+}
 
+input,
+label {
+  margin: 0.4rem 0;
 }
 
 .ownerBar:hover {

@@ -119,15 +119,15 @@ class BarsBookViewSet(mixins.CreateModelMixin,
         return super(BarsBookViewSet, self).get_permissions()
 
     def create(self, request, bar_slug):
-
+        
+        
         try:
             bar = Bar.objects.get(slug=bar_slug)
         except Bar.DoesNotExist:
             raise NotFound('An bar with this slug was not found.')
 
         profile = self.request.user.profile
-        time = request.data.get('time')
-        profile.book(bar, time)
+        profile.book(bar)
 
         serializer = self.serializer_class(bar, context={'request': request})
 
