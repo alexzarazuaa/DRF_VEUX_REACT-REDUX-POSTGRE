@@ -15,7 +15,5 @@ class Bar(TimestampedModel):
     
     reference_booking = models.ManyToManyField('profiles.Profile', through='profiles.Booking')
 
-
-
     def __str__(self):
         return self.name
